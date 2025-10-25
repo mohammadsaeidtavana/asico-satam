@@ -1,0 +1,34 @@
+package com.asico.hr.repository;
+
+import com.asico.hr.domain.ExamEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+ * @author mohammad saeid tavana
+ * @version 1.0
+ * @since 2024
+ */
+@Repository
+@Transactional
+public interface ExamRepository extends JpaRepository<ExamEntity, Long> {
+
+
+    List<ExamEntity> findByPhoneNumber(String phoneNumber);
+
+    ExamEntity findByPhoneNumberAndAndCourseId(String phoneNumber ,String courseId);
+
+    @Modifying
+    @Query("update ExamEntity u set u.phoneNumber=:newPhone where u.phoneNumber=:oldPhone")
+    int updatePhoneNumber(@Param("oldPhone") String oldPhone, @Param("newPhone") String newPhone);
+
+
+
+
+}

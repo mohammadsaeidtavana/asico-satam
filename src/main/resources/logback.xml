@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOGS" value="./logs" />
+    <property resource="application.properties" />
+    <property resource="application-dev.properties" />
+    <property resource="application-prod.properties" />
+
+
+    <property name="INFO_LOG_FILE" value="${logger.level.info.file.path}" />
+    <property name="ERROR_LOG_FILE" value="${logger.level.error.file.path}" />
+    <property name="WARN_LOG_FILE" value="${logger.level.warning.file.path}" />
+    <property name="FILE_NAME_PATTERN" value="${logger.file.name.pattern}" />
+    <property name="PATTERN_LAYOUT" value="${logger.pattern.layout}" />
+    <property name="FILE_SIZE" value="${logger.file.size}" />
+
+    <property name="DB_URL" value="${logger.db.url}" />
+    <property name="DB_PASS" value="${logger.db.password}" />
+    <property name="DB_USER" value="${logger.db.username}" />
+    <property name="DB_CLASS" value="${logger.db.datasource.class}" />
+
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                ${PATTERN_LAYOUT}
+                <!--                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%logger{0}): %msg%n%throwable-->
+            </Pattern>
+        </layout>
+    </appender>
+
+    <!-- Error file appender -->
+    <appender name="ErrorFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--        <file>${LOGS}/error.log</file>-->
+        <file>${ERROR_LOG_FILE}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %logger{0} [%t] %m%n</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${ERROR_LOG_FILE}/archived/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!--     Database appender -->
+    <appender name="Database" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>${DB_CLASS}</driverClass>
+            <url>${DB_URL}</url>
+            <user>${DB_USER}</user>
+            <password>${DB_PASS}</password>
+        </connectionSource>
+    </appender>
+    <!-- Info file appender -->
+    <appender name="InfoFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--        <file>${LOGS}/info.log</file>-->
+        <!--        <file>/var/log/validation/info.log</file>-->
+        <file>${INFO_LOG_FILE}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %logger{0} [%t] %m%n</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${INFO_LOG_FILE}/archived/INFO-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Warn file appender -->
+    <appender name="WarnFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--        <file>${LOGS}/warn.log</file>-->
+        <file>${WARN_LOG_FILE}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %logger{0} [%t] %m%n</Pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${WARN_LOG_FILE}/archived/WARN-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${FILE_SIZE}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- LOG everything at INFO level -->
+    <root level="debug">
+        <appender-ref ref="Console" />
+        <appender-ref ref="ErrorFile" />
+        <appender-ref ref="InfoFile" />
+        <appender-ref ref="WarnFile" />
+        <!--        <appender-ref ref="Database" />-->
+    </root>
+
+</configuration>

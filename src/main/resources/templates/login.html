@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta charset="UTF-8">
+    <title>OTP Request Form</title>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<h2>OTP Request Form</h2>
+<form  name="otp" action="v1/otp/send" method="post"  onsubmit="return validatePhoneNumber()"  th:object="${otp}">
+
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}"/><br>
+    <!--  <span th:value="${session.message} "></span><br>-->
+
+<!--      <p th:if="${#fields.hasErrors('phoneNumber') and session != null}" th:text="${session.getAttribute('message')}" class="error"></p>-->
+
+      <p th:if="${#fields.hasErrors('phoneNumber')}" th:text="${session.message}" th:unless="${session.message == null}" class="error"></p>
+
+<!--    <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error"></span><br> correct-->
+
+    <button type="submit">Send OTP</button>
+</form>
+<script>
+    function validatePhoneNumber() {
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var phoneNumberPattern = /^\d{11}$/; // Assuming a 10-digit phone number
+
+        if (!phoneNumberPattern.test(phoneNumber)) {
+            alert(" لطفا شماره موبایل خود را به صورت صحیح وارد کنید ");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
