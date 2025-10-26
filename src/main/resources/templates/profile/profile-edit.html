@@ -1899,8 +1899,170 @@
                                                     <div class="w-2 h-2 bg-foreground rounded-full"></div>
                                                 </div>
                                                 <div class="font-black text-foreground">اطلاعات تحصیلی</div>
+
                                             </div>
 
+                                            <!-- لیست سوابق تحصیلی -->
+                                            <div id="education-list" class="flex flex-col gap-6">
+                                                <!-- مقاطع موجود در مدل -->
+                                                <div th:each="edu, iterStat : *{educations}"
+                                                     class="education-item p-5  relative rounded-xl border border-border bg-secondary space-y-4 shadow-sm ">
+
+                                                    <button type="button"
+                                                            onclick="removeEducation(this)"
+                                                            class="absolute top-2 left-auto right-2 text-red-500 font-bold text-sm z-10">❌</button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                                        <!-- مقطع تحصیلی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مقطع تحصیلی</label>
+                                                            <select dir="rtl"
+                                                                    th:field="*{educations[__${iterStat.index}__].degree}"
+                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
+                                                                <option value="" disabled selected>انتخاب کنید</option>
+                                                                <option value="لیسانس">لیسانس</option>
+                                                                <option value="فوق لیسانس">فوق لیسانس</option>
+                                                                <option value="دکترا">دکترا</option>
+                                                                <option value="دیپلم">دیپلم</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <!-- رشته تحصیلی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">رشته تحصیلی</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].field}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- دانشگاه -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">دانشگاه</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].university}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- معدل -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">معدل</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].grade}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- سال شروع -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">سال شروع</label>
+                                                            <input type="number" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].startYear}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- سال پایان -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">سال پایان</label>
+                                                            <input type="number" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].endYear}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن مقطع جدید -->
+                                            <button type="button" onclick="addEducation()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium">➕ افزودن مقطع جدید</button>
+
+
+
+                                            <!-- دکمه حذف -->
+                                            <button type="button"
+                                                    onclick="removeEducation(this)"
+                                                    class="absolute top-2 left-auto right-2 text-red-500 font-bold text-sm z-10">❌</button>
+
+
+
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">سوابق شغلی</div>
+
+                                            </div>
+
+                                            <!-- لیست سوابق شغلی -->
+                                            <div id="experience-list" class="flex flex-col gap-6">
+                                                <div th:each="exp, iterStat : *{experiences}"
+                                                     class="experience-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button"
+                                                            onclick="removeExperience(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <!-- نام شرکت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">نام شرکت یا سازمان</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].company}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- شهر محل شرکت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">شهر محل شرکت</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].city}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- تاریخ شروع همکاری -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">تاریخ شروع همکاری</label>
+                                                            <input type="date" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].startDate}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- تاریخ پایان همکاری -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">تاریخ پایان همکاری</label>
+                                                            <input type="date" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].endDate}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- مدت زمان همکاری -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مدت زمان همکاری</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].duration}"
+                                                                   placeholder="مثلاً ۲ سال و ۳ ماه"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- سمت شغلی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">سمت شغلی</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{experiences[__${iterStat.index}__].position}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن سابقه شغلی جدید -->
+                                            <button type="button" onclick="addExperience()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن سابقه شغلی</button>
+
+
+                                            <!-- دکمه ثبت فرم -->
+                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>
 
 
 
@@ -1963,22 +2125,20 @@
 
                                                     <ul>
                                                         <li>
-                                                            ۱.در آینده نزدیک ورود به سایت تماما با شماره تلفن همراه
-                                                            انجام
-                                                            خواهد شد. (به زودی)
+
                                                         </li>
                                                         <li>
-                                                            ۲.در هنگام ورود به سایت پیامکی برای شما ارسال میشود تا
+                                                            1.در هنگام ورود به سایت پیامکی برای شما ارسال میشود تا
                                                             از
                                                             ورود‌های بدون اجازه مطلع شوید. کنید
                                                         </li>
                                                         <li>
-                                                            ۳.در صورت فعال‌سازی نوتیفیکشن یک دوره، قسمت‌های جدید آن
+                                                            2.در صورت فعال‌سازی نوتیفیکشن یک دوره، قسمت‌های جدید آن
                                                             دوره
                                                             با پیامک به شما اطلاع داده خواهد شد. (به زودی)
                                                         </li>
                                                         <li><b>
-                                                            ۴.پس از تغییر شماره تماس نیاز است مجدد وارد پنل خود شوید .
+                                                            3.پس از تغییر شماره تماس نیاز است مجدد وارد پنل خود شوید .
                                                         </b></li>
 
                                                     </ul>
@@ -2528,41 +2688,113 @@
 
     function addEducation() {
         const container = document.getElementById('education-list');
+        const maxSections = 8;
+        if (container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا ۴ مقطع تحصیلی اضافه کنید!از کاردانی تا دکترا.");
+            return;
+        }
         const index = container.children.length;
         const template = `
-        <div class="grid grid-cols-2 gap-4 p-4 border rounded-xl bg-secondary">
-            <div class="space-y-1">
+        <div class=" grid grid-cols-2 gap-5 p-4 border rounded-xl bg-secondary">
+        <button type="button" onclick="removeEducation(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+            <div class="education-item space-y-1">
                 <label class="font-medium text-xs text-muted">مقطع تحصیلی</label>
                 <input type="text" dir="rtl" name="educations[${index}].degree"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class="space-y-1">
+            <div class="  space-y-1">
                 <label class="font-medium text-xs text-muted">رشته تحصیلی</label>
                 <input type="text" dir="rtl" name="educations[${index}].field"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class="space-y-1">
+            <div class=" space-y-1">
                 <label class="font-medium text-xs text-muted">دانشگاه</label>
                 <input type="text" dir="rtl" name="educations[${index}].university"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class="space-y-1">
+            <div class=" space-y-1">
                 <label class="font-medium text-xs text-muted">سال شروع</label>
                 <input type="number" dir="rtl" name="educations[${index}].startYear"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class="space-y-1">
+            <div class=" space-y-1">
                 <label class="font-medium text-xs text-muted">سال پایان</label>
                 <input type="number" dir="rtl" name="educations[${index}].endYear"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class="space-y-1">
+            <div class=" space-y-1">
                 <label class="font-medium text-xs text-muted">معدل</label>
                 <input type="text" dir="rtl" name="educations[${index}].grade"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-        </div>`;
+        </div><br>`;
         container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeEducation(button) {
+
+        const eduDiv = button.closest('div.education-item');
+        if (eduDiv) eduDiv.remove();
+       // window.location.reload();
+    }
+
+
+    function addExperience() {
+        const container = document.getElementById('experience-list');
+        const maxSections = 12;
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا ۵ سابقه شغلی اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="experience-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removeExperience(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">نام شرکت یا سازمان</label>
+                <input type="text" name="experiences[${index}].company"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">شهر محل شرکت</label>
+                <input type="text" name="experiences[${index}].city"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ شروع همکاری</label>
+                <input type="date" name="experiences[${index}].startDate"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ پایان همکاری</label>
+                <input type="date" name="experiences[${index}].endDate"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">مدت زمان همکاری</label>
+                <input type="text" name="experiences[${index}].duration" placeholder="مثلاً ۲ سال و ۳ ماه"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">سمت شغلی</label>
+                <input type="text" name="experiences[${index}].position"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeExperience(button) {
+        const expDiv = button.closest('.experience-item');
+        if (expDiv) expDiv.remove();
+        // صفحه رفرش بعد از حذف
+        //window.location.reload();
     }
 
 
