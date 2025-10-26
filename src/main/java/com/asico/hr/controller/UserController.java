@@ -1,10 +1,11 @@
 package com.asico.hr.controller;
 
 import com.asico.hr.domain.UserModel;
-import com.asico.hr.domain.studyEntity;
+import com.asico.hr.domain.positionRequest;
 import com.asico.hr.repository.*;
-import com.asico.hr.service.StudyService;
+import com.asico.hr.service.PositionService;
 import com.asico.hr.service.UserService;
+import com.asico.hr.sms.service.SmsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author mohammad saeid tavana
@@ -37,14 +41,16 @@ public class UserController {
     CartRepository cartRepository;
     BulletinRepository bulletinRepository;
 
-    StudyService studyService;
+    PositionService positionService;
+
+    SmsService smsService;
 
 
     public UserController(UserService userService, UserLogRepository userLogRepository,
                           UserCourseRepository courseRepository,
                           ExamRepository examRepository, ContactusRepository contactusRepository,
                           CertificateRepository certificateRepository, CartRepository cartRepository,
-                          BulletinRepository bulletinRepository, StudyService studyService) {
+                          BulletinRepository bulletinRepository, PositionService positionService, SmsService smsService) {
         this.userService = userService;
         this.userLogRepository = userLogRepository;
         this.courseRepository = courseRepository;
@@ -53,7 +59,8 @@ public class UserController {
         this.certificateRepository = certificateRepository;
         this.cartRepository = cartRepository;
         this.bulletinRepository = bulletinRepository;
-        this.studyService = studyService;
+        this.positionService = positionService;
+        this.smsService = smsService;
     }
 
     @PostMapping(value = "/edit")
@@ -81,6 +88,7 @@ public class UserController {
 
         String phoneNumber = String.valueOf(httpSession.getAttribute("phoneNumber"));
         UserModel userModel = (UserModel) httpSession.getAttribute("userinfo");
+        String nationalCode = String.valueOf(httpSession.getAttribute("codeMeli"));
 
         userModel.setName(name);
         userModel.setEmail(email);
@@ -111,42 +119,70 @@ public class UserController {
 
     }
 
-    @PostMapping(value = "/time")
-    public ModelAndView time(@RequestParam("time") String time, @RequestParam("subject") String subject,
-                             @RequestParam(value = "year", required = false) String year,
-                             @RequestParam(value = "month", required = false) String month,
-                             @RequestParam(value = "day", required = false) String day,
-                             @RequestParam(value = "type", required = false) String type,
+    @PostMapping(value = "/position")
+    public ModelAndView time(@RequestParam("position") String position, @RequestParam("companyName") String company,
                              HttpServletRequest request, HttpSession httpSession) {
 
+        System.out.println(position);
+        System.out.println(company);
 
-        String phoneNumber = String.valueOf(httpSession.getAttribute("phoneNumber"));
-        UserModel userModel = (UserModel) httpSession.getAttribute("userinfo");
+        try {
 
-        studyEntity studyEntity = new studyEntity();
-        if (userModel==null){
-            studyEntity.setName("");
+            String phoneNumber = String.valueOf(httpSession.getAttribute("phoneNumber"));
+            String nationalCode = String.valueOf(httpSession.getAttribute("codeMeli"));
+            UserModel userModel = (UserModel) httpSession.getAttribute("userinfo");
+            positionRequest positionRequest = new positionRequest();
+            List<positionRequest> positionRequestList = positionService.search(phoneNumber);
+            System.out.println(positionRequestList.toString());
+            if (positionRequestList.isEmpty() || positionRequestList.size() == 0) {
 
-        }else {
+                System.out.println("===== positionRequestList null ");
+                positionRequest.setPhoneNumber(phoneNumber);
+                positionRequest.setPosition(position);
+                positionRequest.setCompany(company);
+                positionRequest.setProcess(false);
+                positionRequest.setNationalCode(nationalCode);
+                positionRequest.setDate(new Date());
+                positionService.save(positionRequest);
+                smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+                ModelAndView view = new ModelAndView("redirect:/profile");
+                return view;
+                // redirect to success page
+            } else {
+                System.out.println("===== positionRequestList null111 ");
+                for (positionRequest positionRequestObject : positionRequestList) {
+                    if (positionRequestObject.isProcess() == true) {
+                        positionRequest.setPhoneNumber(phoneNumber);
+                        positionRequest.setPosition(position);
+                        positionRequest.setCompany(company);
+                        positionRequest.setProcess(false);
+                        positionRequest.setNationalCode(nationalCode);
+                        positionRequest.setDate(new Date());
+                        positionService.save(positionRequest);
+                        smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+                        ModelAndView view = new ModelAndView("redirect:/profile");
+                        return view;
+                        // redirect to success page
+                    } else {
+                        System.out.println("===== positionRequestList nul222l ");
+                        ModelAndView view = new ModelAndView("redirect:/panel-error");
+                        String errorMessage = "َشما یک درخواست در جریان دارید .  ";
+                        view.addObject("errorMessage", errorMessage);
+                        return view;
+                    }
 
-            studyEntity.setName(userModel.getName());
-
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("===== positionRequestList null exception ");
+            ModelAndView view = new ModelAndView("redirect:/panel-error");
+            String errorMessage = "َثبت درخواست با خطا مواجه شد ، لطفا دقایقی دیگر تلاش کنید .  ";
+            view.addObject("errorMessage", errorMessage);
+            return view;
         }
-
-        studyEntity.setPhoneNumber(phoneNumber);
-        studyEntity.setYear(year);
-        studyEntity.setMonth(month);
-        studyEntity.setDay(day);
-        studyEntity.setDuration(Long.parseLong(time));
-        studyEntity.setSubject(subject);
-        studyEntity.setName(userModel.getName());
-        studyService.save(studyEntity);
-
-
-
-        ModelAndView view = new ModelAndView("redirect:/read-report");
+        System.out.println("===== positionRequestList full ");
+        ModelAndView view = new ModelAndView("redirect:/profile");
         return view;
-
     }
 
     @PostMapping(value = "/editPhone")

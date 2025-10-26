@@ -1,6 +1,6 @@
 package com.asico.hr.repository;
 
-import com.asico.hr.domain.studyEntity;
+import com.asico.hr.domain.positionRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public interface StudyRepository extends JpaRepository<studyEntity, Long> {
+public interface PositonRequestRepository extends JpaRepository<positionRequest, Long> {
 
 
 }

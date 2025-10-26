@@ -13,7 +13,7 @@ import com.asico.hr.payment.service.OrderService;
 import com.asico.hr.payment.service.PaymentService;
 import com.asico.hr.service.UserCourseService;
 import com.asico.hr.service.UserService;
-import com.asico.hr.sms.service.ISmsService;
+import com.asico.hr.sms.service.SmsService;
 import com.asico.hr.service.CartService;
 import com.asico.hr.service.CourseService;
 import com.asico.hr.spotplayer.domain.LicenseModel;
@@ -53,7 +53,7 @@ public class PaymentController {
 
     OrderService orderService;
 
-    ISmsService smsService;
+    SmsService smsService;
 
     UserService userService;
 
@@ -62,7 +62,7 @@ public class PaymentController {
 
 
     public PaymentController(UserCourseService userCourseService, CartService cartService, CourseService courseService,
-                             PaymentService paymentService, License license, OrderService orderService, ISmsService smsService,
+                             PaymentService paymentService, License license, OrderService orderService, SmsService smsService,
                              UserService userService) {
         this.userCourseService = userCourseService;
         this.cartService = cartService;

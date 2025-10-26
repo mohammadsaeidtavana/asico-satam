@@ -13,7 +13,7 @@ import com.asico.hr.inquery.service.InqueryService;
 import com.asico.hr.service.*;
 import com.asico.hr.sms.domain.OtpRequest;
 import com.asico.hr.sms.domain.OtpResponse;
-import com.asico.hr.sms.service.ISmsService;
+import com.asico.hr.sms.service.SmsService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -42,7 +42,7 @@ import java.util.concurrent.ExecutionException;
 @RequestMapping("${sms.otp.controller.url}")
 public class SmsController {
 
-    ISmsService service;
+    SmsService service;
 
     UserLogService userLogService;
 
@@ -61,7 +61,7 @@ public class SmsController {
 
     private final static String errorMessage = "کد وارد شده معتبر نمی باشد ";
 
-    public SmsController(ISmsService service, UserLogService userLogService, UserService userService, CartService cartService
+    public SmsController(SmsService service, UserLogService userLogService, UserService userService, CartService cartService
             , UserCourseService userCourseService, CourseService courseService, InqueryService inqueryService) {
         this.service = service;
         this.userLogService = userLogService;
