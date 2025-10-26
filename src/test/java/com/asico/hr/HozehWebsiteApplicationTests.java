@@ -5,7 +5,7 @@ import com.asico.hr.payment.service.PaymentService;
 import com.asico.hr.service.CartService;
 import com.asico.hr.service.CourseService;
 import com.asico.hr.service.UserService;
-import com.asico.hr.sms.service.ISmsService;
+import com.asico.hr.sms.service.SmsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ class HozehWebsiteApplicationTests {
     OrderService orderService;
 
     @Autowired
-    ISmsService iSmsService;
+    SmsService iSmsService;
 
     @Autowired
     UserService userService;

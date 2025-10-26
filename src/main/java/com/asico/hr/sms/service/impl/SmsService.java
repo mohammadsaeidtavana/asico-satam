@@ -4,7 +4,6 @@ package com.asico.hr.sms.service.impl;
 import com.asico.hr.sms.config.ConfigParam;
 import com.asico.hr.sms.config.MemoryUtil;
 import com.asico.hr.sms.domain.*;
-import com.asico.hr.sms.service.ISmsService;
 import com.squareup.okhttp.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
  * @since 2025\
  */
 @Service("smsService")
-public class SmsService implements ISmsService {
+public class SmsService implements com.asico.hr.sms.service.SmsService {
 
     ConfigParam _param;
 

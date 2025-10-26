@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
  * @author m.tavana
  * @since 2025\
  */
-public interface ISmsService {
+public interface SmsService {
 
     OtpResponse sendCode(OtpRequest request);
 

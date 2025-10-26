@@ -13,34 +13,35 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "study")
-public class studyEntity extends BaseEntity<Long> {
+@Table(name = "position_Request")
+public class positionRequest extends BaseEntity<Long> {
 
 
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "year")
-    private String year;
+    @Column(name = "nationalCode")
+    private String nationalCode;
 
-    @Column(name = "month")
-    private String month;
+    @Column(name = "company")
+    private String company;
 
-    @Column(name = "day")
-    private String day;
+    @Column(name = "position")
+    private String position;
 
-    @Column(name = "duration")
-    private Long duration;
+    @Column(name = "request_Date")
+    private Date date;
 
-    @Column(name = "subject")
-    private String subject;
+    @Column(name = "isProcesed")
+    private boolean isProcess;
 
-    @Column(name = "name")
-    private String name;
+
 
 
 
