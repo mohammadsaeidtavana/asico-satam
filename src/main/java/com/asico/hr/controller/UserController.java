@@ -2,6 +2,9 @@ package com.asico.hr.controller;
 
 import com.asico.hr.domain.UserModel;
 import com.asico.hr.domain.positionRequest;
+import com.asico.hr.inquery.domain.shahkar.ShahkarRequestApi;
+import com.asico.hr.inquery.domain.shahkar.ShahkarResponseApi;
+import com.asico.hr.inquery.service.InqueryService;
 import com.asico.hr.repository.*;
 import com.asico.hr.service.PositionService;
 import com.asico.hr.service.UserService;
@@ -45,12 +48,15 @@ public class UserController {
 
     SmsService smsService;
 
+    InqueryService inqueryService;
+
 
     public UserController(UserService userService, UserLogRepository userLogRepository,
                           UserCourseRepository courseRepository,
                           ExamRepository examRepository, ContactusRepository contactusRepository,
                           CertificateRepository certificateRepository, CartRepository cartRepository,
-                          BulletinRepository bulletinRepository, PositionService positionService, SmsService smsService) {
+                          BulletinRepository bulletinRepository, PositionService positionService, SmsService smsService,
+                          InqueryService inqueryService) {
         this.userService = userService;
         this.userLogRepository = userLogRepository;
         this.courseRepository = courseRepository;
@@ -61,6 +67,7 @@ public class UserController {
         this.bulletinRepository = bulletinRepository;
         this.positionService = positionService;
         this.smsService = smsService;
+        this.inqueryService = inqueryService;
     }
 
     @PostMapping(value = "/edit")
@@ -136,7 +143,6 @@ public class UserController {
             System.out.println(positionRequestList.toString());
             if (positionRequestList.isEmpty() || positionRequestList.size() == 0) {
 
-                System.out.println("===== positionRequestList null ");
                 positionRequest.setPhoneNumber(phoneNumber);
                 positionRequest.setPosition(position);
                 positionRequest.setCompany(company);
@@ -149,7 +155,6 @@ public class UserController {
                 return view;
                 // redirect to success page
             } else {
-                System.out.println("===== positionRequestList null111 ");
                 for (positionRequest positionRequestObject : positionRequestList) {
                     if (positionRequestObject.isProcess() == true) {
                         positionRequest.setPhoneNumber(phoneNumber);
@@ -164,7 +169,7 @@ public class UserController {
                         return view;
                         // redirect to success page
                     } else {
-                        System.out.println("===== positionRequestList nul222l ");
+
                         ModelAndView view = new ModelAndView("redirect:/panel-error");
                         String errorMessage = "َشما یک درخواست در جریان دارید .  ";
                         view.addObject("errorMessage", errorMessage);
@@ -174,13 +179,12 @@ public class UserController {
                 }
             }
         } catch (Exception e) {
-            System.out.println("===== positionRequestList null exception ");
+
             ModelAndView view = new ModelAndView("redirect:/panel-error");
             String errorMessage = "َثبت درخواست با خطا مواجه شد ، لطفا دقایقی دیگر تلاش کنید .  ";
             view.addObject("errorMessage", errorMessage);
             return view;
         }
-        System.out.println("===== positionRequestList full ");
         ModelAndView view = new ModelAndView("redirect:/profile");
         return view;
     }
@@ -189,25 +193,47 @@ public class UserController {
     public ModelAndView edit_phone(@RequestParam("phone_number") String oldPhone, @RequestParam("phone_number_new") String newPhone,
                                    HttpServletRequest request, HttpSession httpSession) {
 
-        userService.updatephone(oldPhone, newPhone);
+        ShahkarRequestApi shahkarRequestApi = new ShahkarRequestApi();
+        shahkarRequestApi.setMobileNumber(newPhone);
+        shahkarRequestApi.setNationalCode((String) httpSession.getAttribute("codeMeli"));
+        ShahkarResponseApi shahkarResponse = null;
+        try {
+            shahkarResponse = inqueryService.shahkar(shahkarRequestApi);
 
-        userLogRepository.updatePhoneNumber(oldPhone, newPhone);
 
-        courseRepository.updatePhoneNumber(oldPhone, newPhone);
+            if (shahkarResponse.isSuccess() && shahkarResponse.getData().getResult().isMatched()) {
 
-        examRepository.updatePhoneNumber(oldPhone, newPhone);
 
-        contactusRepository.updatePhoneNumber(oldPhone, newPhone);
+                userService.updatephone(oldPhone, newPhone);
 
-        certificateRepository.updatePhoneNumber(oldPhone, newPhone);
+                userLogRepository.updatePhoneNumber(oldPhone, newPhone);
 
-        cartRepository.updatePhoneNumber(oldPhone, newPhone);
+                courseRepository.updatePhoneNumber(oldPhone, newPhone);
 
-        bulletinRepository.updatePhoneNumber(oldPhone, newPhone);
+                examRepository.updatePhoneNumber(oldPhone, newPhone);
 
-        ModelAndView view = new ModelAndView("redirect:/logout");
-        return view;
+                contactusRepository.updatePhoneNumber(oldPhone, newPhone);
 
+                certificateRepository.updatePhoneNumber(oldPhone, newPhone);
+
+                cartRepository.updatePhoneNumber(oldPhone, newPhone);
+
+                bulletinRepository.updatePhoneNumber(oldPhone, newPhone);
+
+                ModelAndView view = new ModelAndView("redirect:/logout");
+                return view;
+            } else {
+                ModelAndView view = new ModelAndView("redirect:/panel-error");
+                String errorMessage = "َشماره موبایل جدید متعلق به شما نیست و لطفا شماره موبایل متعلق به خودتان را وارد کنید .  ";
+                view.addObject("errorMessage", errorMessage);
+                return view;
+            }
+        } catch (Exception e) {
+            ModelAndView view = new ModelAndView("redirect:/panel-error");
+            String errorMessage = "َخطا ، لطفا مجددا چند دقیقه دیگر اقدام کنید .  ";
+            view.addObject("errorMessage", errorMessage);
+            return view;
+        }
     }
 
 

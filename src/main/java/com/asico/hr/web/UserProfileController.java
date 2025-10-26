@@ -1,12 +1,10 @@
 package com.asico.hr.web;
 
 
-import com.asico.hr.domain.CertificateModel;
-import com.asico.hr.domain.CourseModel;
-import com.asico.hr.domain.ExamModel;
-import com.asico.hr.domain.UserCourseModel;
+import com.asico.hr.domain.*;
 import com.asico.hr.payment.domain.OrderModel;
 import com.asico.hr.payment.service.OrderService;
+import com.asico.hr.repository.PositonRequestRepository;
 import com.asico.hr.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -39,15 +37,18 @@ public class UserProfileController {
 
     OrderService orderService;
 
+    PositionService positionService;
 
     public UserProfileController(UserLogService userLogService, UserCourseService userCourseService, CourseService courseService,
-                                 CertificateService certificateService, ExamService examService, OrderService orderService) {
+                                 CertificateService certificateService, ExamService examService, OrderService orderService,
+                                 PositionService positionService) {
         this.userLogService = userLogService;
         this.userCourseService = userCourseService;
         this.courseService = courseService;
         this.certificateService = certificateService;
         this.examService = examService;
         this.orderService = orderService;
+        this.positionService = positionService;
     }
 
     private final String baseDirectory = "profile/";
@@ -74,6 +75,7 @@ public class UserProfileController {
         httpSession.setAttribute("examCount", examCount);
         httpSession.setAttribute("certificateCount", certificateNumber);
         httpSession.setAttribute("UserCoursesCount", UserCoursesCount(phoneNumber));
+        httpSession.setAttribute("UserRequestCount", UserRequestCunt(phoneNumber));
         List<UserCourseModel> list = UserCourses(phoneNumber);
         httpSession.setAttribute("userCourses", list);
         List<CourseModel> detailsList = new ArrayList<>();
@@ -129,17 +131,19 @@ public class UserProfileController {
         httpSession.removeAttribute("examCount");
         httpSession.removeAttribute("examList");
         httpSession.removeAttribute("certificateList");
+        httpSession.removeAttribute("codeMeli");
+        httpSession.removeAttribute("UserRequestCount");
 
         return "redirect:/home";
     }
 
     @RequestMapping(value = "/profile-financial")
-    public String profile_financial(HttpSession httpSession , Model model) {
+    public String profile_financial(HttpSession httpSession, Model model) {
 
         String phoneNumber = String.valueOf(httpSession.getAttribute("phoneNumber"));
 
-        List<OrderModel> UserOrders=orderService.userOrder(phoneNumber);
-        model.addAttribute("userOrders",UserOrders);
+        List<OrderModel> UserOrders = orderService.userOrder(phoneNumber);
+        model.addAttribute("userOrders", UserOrders);
 
         return baseDirectory + "profile-financial";
     }
@@ -180,13 +184,15 @@ public class UserProfileController {
 
         return modelAndView;
     }
+
     @RequestMapping(value = "/panel-error")
-    public ModelAndView payment_error(HttpSession httpSession , @RequestParam(required = false) String errorMessage, Model model) {
+    public ModelAndView payment_error(HttpSession httpSession, @RequestParam(required = false) String errorMessage, Model model) {
         model.addAttribute("errorMessage", errorMessage);
         ModelAndView modelAndView = new ModelAndView(baseDirectory + "panel-error");
 
         return modelAndView;
     }
+
     private List<UserCourseModel> UserCourses(String phoneNumber) {
 
 
@@ -199,6 +205,21 @@ public class UserProfileController {
 
         List<UserCourseModel> list = userCourseService.getAll(phoneNumber);
         return list.size();
+    }
+
+    private int UserRequestCunt(String phoneNumber) {
+
+        ArrayList<positionRequest> positionRequests=new ArrayList<>();
+        List<positionRequest> positions=positionService.getAll();
+
+        for (positionRequest request:positions) {
+            if (!request.isProcess()){
+                positionRequests.add(request);
+            }
+
+        }
+
+        return positionRequests.size();
     }
 
 
