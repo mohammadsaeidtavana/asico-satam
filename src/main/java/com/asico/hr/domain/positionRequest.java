@@ -41,6 +41,9 @@ public class positionRequest extends BaseEntity<Long> {
     @Column(name = "isProcesed")
     private boolean isProcess;
 
+    @Column(name = "isUserAccept")
+    private String isUserAccept;
+
 
 
 

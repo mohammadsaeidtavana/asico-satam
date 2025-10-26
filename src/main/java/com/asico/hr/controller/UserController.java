@@ -128,10 +128,11 @@ public class UserController {
 
     @PostMapping(value = "/position")
     public ModelAndView time(@RequestParam("position") String position, @RequestParam("companyName") String company,
-                             HttpServletRequest request, HttpSession httpSession) {
+                             @RequestParam("userAccept") String userAccept, HttpServletRequest request, HttpSession httpSession) {
 
         System.out.println(position);
         System.out.println(company);
+        System.out.println(userAccept);
 
         try {
 
@@ -149,6 +150,7 @@ public class UserController {
                 positionRequest.setProcess(false);
                 positionRequest.setNationalCode(nationalCode);
                 positionRequest.setDate(new Date());
+                positionRequest.setIsUserAccept(userAccept);
                 positionService.save(positionRequest);
                 smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
                 ModelAndView view = new ModelAndView("redirect:/profile");
