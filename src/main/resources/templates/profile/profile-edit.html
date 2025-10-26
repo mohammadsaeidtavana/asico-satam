@@ -1902,29 +1902,27 @@
 
                                             </div>
 
-                                            <!-- لیست سوابق تحصیلی -->
                                             <div id="education-list" class="flex flex-col gap-6">
-                                                <!-- مقاطع موجود در مدل -->
                                                 <div th:each="edu, iterStat : *{educations}"
-                                                     class="education-item p-5  relative rounded-xl border border-border bg-secondary space-y-4 shadow-sm ">
+                                                     class="education-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
 
+                                                    <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeEducation(this)"
-                                                            class="absolute top-2 left-auto right-2 text-red-500 font-bold text-sm z-10">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                                                        <!-- مقطع تحصیلی -->
+                                                        <!-- نام مقطع تحصیلی -->
                                                         <div class="space-y-1">
                                                             <label class="font-medium text-xs text-muted">مقطع تحصیلی</label>
                                                             <select dir="rtl"
                                                                     th:field="*{educations[__${iterStat.index}__].degree}"
                                                                     class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
                                                                 <option value="" disabled selected>انتخاب کنید</option>
+                                                                <option value="دیپلم">دیپلم</option>
                                                                 <option value="لیسانس">لیسانس</option>
                                                                 <option value="فوق لیسانس">فوق لیسانس</option>
                                                                 <option value="دکترا">دکترا</option>
-                                                                <option value="دیپلم">دیپلم</option>
                                                             </select>
                                                         </div>
 
@@ -1936,7 +1934,7 @@
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
 
-                                                        <!-- دانشگاه -->
+                                                        <!-- دانشگاه محل تحصیل -->
                                                         <div class="space-y-1">
                                                             <label class="font-medium text-xs text-muted">دانشگاه</label>
                                                             <input type="text" dir="rtl"
@@ -1944,43 +1942,31 @@
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
 
-                                                        <!-- معدل -->
+                                                        <!-- تاریخ شروع -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">معدل</label>
-                                                            <input type="text" dir="rtl"
-                                                                   th:field="*{educations[__${iterStat.index}__].grade}"
+                                                            <label class="font-medium text-xs text-muted">تاریخ شروع</label>
+                                                            <input type="date" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].startDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
 
-                                                        <!-- سال شروع -->
+                                                        <!-- تاریخ پایان -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">سال شروع</label>
-                                                            <input type="number" dir="rtl"
-                                                                   th:field="*{educations[__${iterStat.index}__].startYear}"
-                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-                                                        </div>
-
-                                                        <!-- سال پایان -->
-                                                        <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">سال پایان</label>
-                                                            <input type="number" dir="rtl"
-                                                                   th:field="*{educations[__${iterStat.index}__].endYear}"
+                                                            <label class="font-medium text-xs text-muted">تاریخ پایان</label>
+                                                            <input type="date" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].endDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <!-- دکمه افزودن مقطع جدید -->
+                                            <!-- دکمه افزودن مقطع تحصیلی جدید -->
                                             <button type="button" onclick="addEducation()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium">➕ افزودن مقطع جدید</button>
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن مقطع تحصیلی</button>
 
-
-
-                                            <!-- دکمه حذف -->
-                                            <button type="button"
-                                                    onclick="removeEducation(this)"
-                                                    class="absolute top-2 left-auto right-2 text-red-500 font-bold text-sm z-10">❌</button>
+<!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
+<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
 
 
 
@@ -2059,10 +2045,222 @@
                                             <!-- دکمه افزودن سابقه شغلی جدید -->
                                             <button type="button" onclick="addExperience()"
                                                     class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن سابقه شغلی</button>
-
-
                                             <!-- دکمه ثبت فرم -->
-                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>
+<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
+
+
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">دوره ها و گواهی نامه ها</div>
+
+                                            </div>
+
+                                            <!-- لیست دوره‌ها و گواهی‌نامه‌ها -->
+                                            <div id="courses-list" class="flex flex-col gap-6">
+                                                <div th:each="course, iterStat : *{courses}"
+                                                     class="course-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button"
+                                                            onclick="removeCourse(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <!-- عنوان دوره -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">عنوان دوره</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{courses[__${iterStat.index}__].title}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- برگزارکننده -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">برگزارکننده</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{courses[__${iterStat.index}__].organizer}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- تاریخ دریافت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">تاریخ دریافت</label>
+                                                            <input type="date" dir="rtl"
+                                                                   th:field="*{courses[__${iterStat.index}__].receivedDate}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- مدت دوره -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مدت دوره</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{courses[__${iterStat.index}__].duration}"
+                                                                   placeholder="مثلاً ۲ هفته یا ۳ ماه"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن دوره جدید -->
+                                            <button type="button" onclick="addCourse()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن دوره یا گواهی‌نامه</button>
+
+<!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
+<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
+
+
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">مهارت ها</div>
+
+                                            </div>
+
+                                            <!-- لیست مهارت‌ها -->
+                                            <div id="skills-list" class="flex flex-col gap-6">
+                                                <div th:each="skill, iterStat : *{skills}"
+                                                     class="skill-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button"
+                                                            onclick="removeSkill(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <!-- مهارت تخصصی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مهارت تخصصی</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{skills[__${iterStat.index}__].technical}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- مهارت نرم -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مهارت نرم</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{skills[__${iterStat.index}__].soft}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن مهارت جدید -->
+                                            <button type="button" onclick="addSkill()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن مهارت</button>
+
+
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">پژوهش های و مقاله ها</div>
+
+                                            </div>
+
+                                            <!-- لیست پژوهش‌ها و مقالات -->
+                                            <div id="research-list" class="flex flex-col gap-6">
+                                                <div th:each="research, iterStat : *{researches}"
+                                                     class="research-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button"
+                                                            onclick="removeResearch(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <!-- عنوان پژوهش/مقاله -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">عنوان پژوهش/مقاله</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{researches[__${iterStat.index}__].title}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- هدف از پژوهش -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">هدف از پژوهش</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{researches[__${iterStat.index}__].objective}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <!-- لینک پژوهش (اختیاری) -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">لینک پژوهش (اختیاری)</label>
+                                                            <input type="url" dir="rtl"
+                                                                   th:field="*{researches[__${iterStat.index}__].link}"
+                                                                   placeholder="https://example.com"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن پژوهش جدید -->
+                                            <button type="button" onclick="addResearch()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن پژوهش/مقاله</button>
+
+
+
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">حوزه فعالیت تخصصی (خوداظهاری)</div>
+                                            </div>
+
+                                                <!-- لیست حوزه‌های فعالیت تخصصی -->
+                                                <div id="expertise-list" class="flex flex-col gap-6">
+                                                    <div th:each="exp, iterStat : *{expertises}"
+                                                         class="expertise-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                        <!-- دکمه حذف -->
+                                                        <button type="button"
+                                                                onclick="removeExpertise(this)"
+                                                                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+
+                                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                            <!-- حوزه فعالیت -->
+                                                            <div class="space-y-1">
+                                                                <label class="font-medium text-xs text-muted">حوزه فعالیت</label>
+                                                                <input type="text" dir="rtl"
+                                                                       th:field="*{expertises[__${iterStat.index}__].field}"
+                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                            </div>
+
+                                                            <!-- حوزه صنعت -->
+                                                            <div class="space-y-1">
+                                                                <label class="font-medium text-xs text-muted">حوزه صنعت</label>
+                                                                <input type="text" dir="rtl"
+                                                                       th:field="*{expertises[__${iterStat.index}__].industry}"
+                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                            </div>
+
+                                                            <!-- گرایش فعالیت -->
+                                                            <div class="space-y-1">
+                                                                <label class="font-medium text-xs text-muted">مدت زمان فعالیت (ماه)</label>
+                                                                <input type="number" dir="rtl"
+                                                                       th:field="*{expertises[__${iterStat.index}__].orientation}"
+                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- دکمه افزودن حوزه جدید -->
+                                                <button type="button" onclick="addExpertise()"
+                                                        class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن حوزه فعالیت</button>
+
 
 
 
@@ -2689,54 +2887,58 @@
     function addEducation() {
         const container = document.getElementById('education-list');
         const maxSections = 8;
-        if (container.children.length >= maxSections) {
-            alert("شما فقط می‌توانید تا ۴ مقطع تحصیلی اضافه کنید!از کاردانی تا دکترا.");
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا ۴ مقطع تحصیلی اضافه کنید!");
             return;
         }
+
         const index = container.children.length;
         const template = `
-        <div class=" grid grid-cols-2 gap-5 p-4 border rounded-xl bg-secondary">
+    <div class="education-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
         <button type="button" onclick="removeEducation(this)"
                 class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
-            <div class="education-item space-y-1">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
                 <label class="font-medium text-xs text-muted">مقطع تحصیلی</label>
-                <input type="text" dir="rtl" name="educations[${index}].degree"
-                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                <select dir="rtl" name="educations[${index}].degree"
+                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
+                    <option value="" disabled selected>انتخاب کنید</option>
+                    <option value="دیپلم">دیپلم</option>
+                    <option value="لیسانس">لیسانس</option>
+                    <option value="فوق لیسانس">فوق لیسانس</option>
+                    <option value="دکترا">دکترا</option>
+                </select>
             </div>
-            <div class="  space-y-1">
+            <div class="space-y-1">
                 <label class="font-medium text-xs text-muted">رشته تحصیلی</label>
-                <input type="text" dir="rtl" name="educations[${index}].field"
+                <input type="text" name="educations[${index}].field"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class=" space-y-1">
+            <div class="space-y-1">
                 <label class="font-medium text-xs text-muted">دانشگاه</label>
-                <input type="text" dir="rtl" name="educations[${index}].university"
+                <input type="text" name="educations[${index}].university"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class=" space-y-1">
-                <label class="font-medium text-xs text-muted">سال شروع</label>
-                <input type="number" dir="rtl" name="educations[${index}].startYear"
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ شروع</label>
+                <input type="date" name="educations[${index}].startDate"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class=" space-y-1">
-                <label class="font-medium text-xs text-muted">سال پایان</label>
-                <input type="number" dir="rtl" name="educations[${index}].endYear"
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ پایان</label>
+                <input type="date" name="educations[${index}].endDate"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
-            <div class=" space-y-1">
-                <label class="font-medium text-xs text-muted">معدل</label>
-                <input type="text" dir="rtl" name="educations[${index}].grade"
-                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-            </div>
-        </div><br>`;
+        </div>
+    </div><br>`;
         container.insertAdjacentHTML('beforeend', template);
     }
 
     function removeEducation(button) {
-
-        const eduDiv = button.closest('div.education-item');
+        const eduDiv = button.closest('.education-item');
         if (eduDiv) eduDiv.remove();
-       // window.location.reload();
+
     }
 
 
@@ -2795,6 +2997,173 @@
         if (expDiv) expDiv.remove();
         // صفحه رفرش بعد از حذف
         //window.location.reload();
+    }
+
+    function addCourse() {
+        const container = document.getElementById('courses-list');
+        const maxSections = 10;
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا 5 دوره اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="course-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removeCourse(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">عنوان دوره</label>
+                <input type="text" name="courses[${index}].title"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">برگزارکننده</label>
+                <input type="text" name="courses[${index}].organizer"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ دریافت</label>
+                <input type="date" name="courses[${index}].receivedDate"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">مدت دوره</label>
+                <input type="text" name="courses[${index}].duration"
+                       placeholder="مثلاً ۲ هفته یا ۳ ماه"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeCourse(button) {
+        const courseDiv = button.closest('.course-item');
+        if (courseDiv) courseDiv.remove();
+
+    }
+
+    function addSkill() {
+        const container = document.getElementById('skills-list');
+        const maxSections = 10;
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا 5 مهارت اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="skill-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removeSkill(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">مهارت تخصصی</label>
+                <input type="text" name="skills[${index}].technical"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">مهارت نرم</label>
+                <input type="text" name="skills[${index}].soft"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeSkill(button) {
+        const skillDiv = button.closest('.skill-item');
+        if (skillDiv) skillDiv.remove();
+
+    }
+
+    function addResearch() {
+        const container = document.getElementById('research-list');
+        const maxSections = 10;
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا 5 پژوهش اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="research-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removeResearch(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">عنوان پژوهش/مقاله</label>
+                <input type="text" name="researches[${index}].title"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">هدف از پژوهش</label>
+                <input type="text" name="researches[${index}].objective"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">لینک پژوهش (اختیاری)</label>
+                <input type="url" name="researches[${index}].link"
+                       placeholder="https://example.com"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeResearch(button) {
+        const researchDiv = button.closest('.research-item');
+        if (researchDiv) researchDiv.remove();
+
+    }
+
+
+    function addExpertise() {
+        const container = document.getElementById('expertise-list');
+        const maxSections = 10;
+
+        if(container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا 5 حوزه فعالیت اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="expertise-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removeExpertise(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">حوزه فعالیت</label>
+                <input type="text" name="expertises[${index}].field"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">حوزه صنعت</label>
+                <input type="text" name="expertises[${index}].industry"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">مدت زمان فعالیت (ماه)</label>
+                <input type="number" name="expertises[${index}].orientation"
+                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+            </div>
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removeExpertise(button) {
+        const expDiv = button.closest('.expertise-item');
+        if (expDiv) expDiv.remove();
+
     }
 
 
