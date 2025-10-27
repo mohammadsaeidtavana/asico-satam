@@ -27,12 +27,12 @@ public class SmsService implements com.asico.hr.sms.service.SmsService {
 
     @Async
     @Override
-    public CompletableFuture<OtpResponse> sendWelcomeCourseSmsAsync(String phoneNumber, String userName) {
+    public CompletableFuture<OtpResponse> sendWelcomeCourseSmsAsync(String phoneNumber, String userName, String refCode) {
 
         OkHttpClient client = new OkHttpClient();
 
         String content = "receptor=" + phoneNumber + "&template=" + _param.smsWelcomeTemplate
-                + "&type=" + OtpType.TEXT.getType() + "&param1=" + userName;
+                + "&type=" + OtpType.TEXT.getType() + "&param1=" + userName + "&param2=" + refCode;
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         RequestBody body = RequestBody.create(mediaType, content);
         Request request = new Request.Builder()

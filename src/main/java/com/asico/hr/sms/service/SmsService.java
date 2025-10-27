@@ -19,7 +19,9 @@ public interface SmsService {
 
    CompletableFuture<OtpResponse> sendCodeAsync(OtpRequest request);
 
-    CompletableFuture<OtpResponse> sendWelcomeCourseSmsAsync(String phoneNumber,String userName );
+    CompletableFuture<OtpResponse> sendWelcomeCourseSmsAsync(String phoneNumber,String userName,String refCode );
+
+
 
 
 }

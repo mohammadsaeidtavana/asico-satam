@@ -44,6 +44,9 @@ public class positionRequest extends BaseEntity<Long> {
     @Column(name = "isUserAccept")
     private String isUserAccept;
 
+    @Column(name = "refrence_code")
+    private int refcode;
+
 
 
 

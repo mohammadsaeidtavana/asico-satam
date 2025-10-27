@@ -9,6 +9,7 @@ import com.asico.hr.repository.*;
 import com.asico.hr.service.PositionService;
 import com.asico.hr.service.UserService;
 import com.asico.hr.sms.service.SmsService;
+import com.asico.hr.utils.UniqueRandomGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -134,6 +135,8 @@ public class UserController {
         System.out.println(company);
         System.out.println(userAccept);
 
+        int refcode= UniqueRandomGenerator.generateUnique8Digit();
+
         try {
 
             String phoneNumber = String.valueOf(httpSession.getAttribute("phoneNumber"));
@@ -151,8 +154,9 @@ public class UserController {
                 positionRequest.setNationalCode(nationalCode);
                 positionRequest.setDate(new Date());
                 positionRequest.setIsUserAccept(userAccept);
+                positionRequest.setRefcode(refcode);
                 positionService.save(positionRequest);
-                smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+                smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName(), String.valueOf(refcode));
                 ModelAndView view = new ModelAndView("redirect:/profile");
                 return view;
                 // redirect to success page
@@ -166,7 +170,7 @@ public class UserController {
                         positionRequest.setNationalCode(nationalCode);
                         positionRequest.setDate(new Date());
                         positionService.save(positionRequest);
-                        smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+                        smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName(), String.valueOf(refcode));
                         ModelAndView view = new ModelAndView("redirect:/profile");
                         return view;
                         // redirect to success page

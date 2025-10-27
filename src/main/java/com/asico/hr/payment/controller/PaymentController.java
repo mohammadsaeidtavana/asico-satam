@@ -142,7 +142,7 @@ public class PaymentController {
 
             // send welcome sms to user
             UserModel userModel = userService.search(phoneNumber);
-            smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+            smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName(),"");
 
             httpSession.removeAttribute("discountRate");
             httpSession.removeAttribute("discount");
@@ -228,7 +228,7 @@ public class PaymentController {
                     // send welcome sms to user
 
                     UserModel userModel = userService.search(phoneNumber);
-                    smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName());
+                    smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName(),"");
 
                     // redirect to profile financial
                     view = new ModelAndView("redirect:/profile-financial");
