@@ -12,6 +12,19 @@
     <link rel="stylesheet" th:href="@{assets/css/fonts.css}"/>
     <link rel="stylesheet" th:href="@{assets/css/app.css}"/>
     <title> پروفایل - ویرایش اطلاعات</title>
+    <style>
+        #filesTable {
+            border-collapse: separate; /* فعال کردن فاصله بین سلول‌ها */
+            border-spacing: 7px 0px; /* افقی: 20px، عمودی: 15px */
+            width: 100%;
+        }
+
+        #filesTable td,
+        #filesTable th {
+            padding: 6px 8px; /* فاصله داخلی سلول‌ها */
+        }
+
+    </style>
 </head>
 
 <body>
@@ -671,63 +684,63 @@
                         <!--                                </a>-->
                         <!--                            </li>-->
                         <li>-->
-<!--                            <a href="/series-panel"-->
-<!--                               class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">-->
-<!--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"-->
-<!--                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">-->
-<!--                                    <path stroke-linecap="round" stroke-linejoin="round"-->
-<!--                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">-->
-<!--                                    </path>-->
-<!--                                </svg>-->
-<!--                                <span class="font-semibold text-xs">دوره های آموزشی</span>-->
-<!--                            </a>-->
-<!--                        </li>
-                        <li>
-                            <a href="/blog-panel"
-                               class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                                    </path>
-                                </svg>
-                                <span class="font-semibold text-xs">مقالات آموزشی</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"
-                               class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                                    </path>
-                                </svg>
-                                <span class="font-semibold text-xs">درباره ما </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/contact-us-panel"
-                               class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                                    </path>
-                                </svg>
-                                <span class="font-semibold text-xs">ارتباط با ما </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- end offcanvas:content -->
-            </div><!-- end offcanvas:box -->
+                            <!--                            <a href="/series-panel"-->
+                            <!--                               class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">-->
+                            <!--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"-->
+                            <!--                                     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">-->
+                            <!--                                    <path stroke-linecap="round" stroke-linejoin="round"-->
+                            <!--                                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">-->
+                            <!--                                    </path>-->
+                            <!--                                </svg>-->
+                            <!--                                <span class="font-semibold text-xs">دوره های آموزشی</span>-->
+                            <!--                            </a>-->
+                            <!--                        </li>
+                                                    <li>
+                                                        <a href="/blog-panel"
+                                                           class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
+                                                                </path>
+                                                            </svg>
+                                                            <span class="font-semibold text-xs">مقالات آموزشی</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                           class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
+                                                                </path>
+                                                            </svg>
+                                                            <span class="font-semibold text-xs">درباره ما </span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/contact-us-panel"
+                                                           class="w-full flex items-center gap-x-2 relative text-muted transition-all hover:text-foreground py-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
+                                                                </path>
+                                                            </svg>
+                                                            <span class="font-semibold text-xs">ارتباط با ما </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div><!-- end offcanvas:content -->
+                </div><!-- end offcanvas:box -->
 
-            <!-- offcanvas:overlay -->
-            <div class="fixed inset-0 h-screen bg-secondary/80 cursor-pointer transition-all duration-1000 z-40"
-                 x-bind:class="offcanvasOpen ? 'opacity-100 visible' : 'opacity-0 invisible'"
-                 x-on:click="offcanvasOpen = false">
-            </div><!-- end offcanvas:overlay -->
-        </div><!-- end offcanvas -->
+                <!-- offcanvas:overlay -->
+                <div class="fixed inset-0 h-screen bg-secondary/80 cursor-pointer transition-all duration-1000 z-40"
+                     x-bind:class="offcanvasOpen ? 'opacity-100 visible' : 'opacity-0 invisible'"
+                     x-on:click="offcanvasOpen = false">
+                </div><!-- end offcanvas:overlay -->
+            </div><!-- end offcanvas -->
     </header>
     <!-- end header -->
 
@@ -1029,7 +1042,7 @@
                                                         و
                                                         نام خانوادگی (فارسی)</label>
                                                     <input type="text" id="fullname" name="fullname"
-                                                           class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                           class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5" required/>
                                                 </div>
                                                 <div class="space-y-1">
                                                     <label for="email"
@@ -1079,6 +1092,172 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <table id="filesTable">
+                                                <tr>
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">صفحه اول
+                                                                شناسنامه</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="birthCertificateFile"
+                                                                       name="birthCertificateFile"
+                                                                       class="hidden"
+                                                                       onchange="updateBirthCertificateFileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png" required/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="birthCertificateFile"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="birthCertificateFileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">صفحه دوم
+                                                                شناسنامه</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="birthCertificatePage2File"
+                                                                       name="birthCertificatePage2File"
+                                                                       class="hidden"
+                                                                       onchange="updateBirthCertificatePage2FileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png" required/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="birthCertificatePage2File"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="birthCertificatePage2FileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">صفحه سوم
+                                                                شناسنامه</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="birthCertificatePage3File"
+                                                                       name="birthCertificatePage3File"
+                                                                       class="hidden"
+                                                                       onchange="updateBirthCertificatePage3FileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png"/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="birthCertificatePage3File"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="birthCertificatePage3FileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">روی کارت
+                                                                ملی</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="nationalCardFrontFile"
+                                                                       name="nationalCardFrontFile"
+                                                                       class="hidden"
+                                                                       onchange="updateNationalCardFrontFileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png" required/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="nationalCardFrontFile"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="nationalCardFrontFileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">پشت کارت
+                                                                ملی</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="nationalCardBackFile"
+                                                                       name="nationalCardBackFile"
+                                                                       class="hidden"
+                                                                       onchange="updateNationalCardBackFileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png" required/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="nationalCardBackFile"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="nationalCardBackFileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">کارت نظام
+                                                                وظیفه</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="militaryCardFile"
+                                                                       name="militaryCardFile"
+                                                                       class="hidden"
+                                                                       onchange="updateMilitaryCardFileName(this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png"/>
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="militaryCardFile"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نام فایل انتخاب‌شده -->
+                                                                <span id="militaryCardFileName"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+
+
                                             <!--                                                <div class="space-y-1 lg:w-1/2">-->
                                             <!--                                                    <label for="username" class="font-medium text-xs text-muted">آدرس-->
                                             <!--                                                        پروفایل</label>-->
@@ -1387,7 +1566,7 @@
                                                 </div>
                                             </div>
                                             <div class="space-y-1">
-<!--                                                <label for="sex" class="font-medium text-xs text-muted">جنسبت</label>-->
+                                                <!--                                                <label for="sex" class="font-medium text-xs text-muted">جنسبت</label>-->
                                                 <div class="grid sm:grid-cols-3 gap-5"
                                                      x-data="{range: function(start, end) { return Array(end - start + 1).fill().map((_, idx) => start + idx) } }">
 
@@ -1444,8 +1623,8 @@
                                             </div>
 
                                             <div class="space-y-1" id="militarySection">
-<!--                                                <label for="militarystatus" class="font-medium text-xs text-muted">وضعیت-->
-<!--                                                    نظام وظیفه</label>-->
+                                                <!--                                                <label for="militarystatus" class="font-medium text-xs text-muted">وضعیت-->
+                                                <!--                                                    نظام وظیفه</label>-->
                                                 <div class="grid sm:grid-cols-3 gap-5"
                                                      x-data="{range: function(start, end) { return Array(end - start + 1).fill().map((_, idx) => start + idx) } }">
 
@@ -1501,8 +1680,8 @@
                                                 </div>
                                             </div>
                                             <div class="space-y-1">
-<!--                                                <label for="ostan" class="font-medium text-xs text-muted"> َاستان محل-->
-<!--                                                    سکونت</label>-->
+                                                <!--                                                <label for="ostan" class="font-medium text-xs text-muted"> َاستان محل-->
+                                                <!--                                                    سکونت</label>-->
                                                 <div class="grid sm:grid-cols-3 gap-5"
                                                      x-data="{range: function(start, end) { return Array(end - start + 1).fill().map((_, idx) => start + idx) } }">
 
@@ -1563,8 +1742,8 @@
                                                 </div>
                                             </div>
                                             <div class="space-y-1">
-<!--                                                <label for="city" class="font-medium text-xs text-muted">َشهر محل-->
-<!--                                                    سکونت</label>-->
+                                                <!--                                                <label for="city" class="font-medium text-xs text-muted">َشهر محل-->
+                                                <!--                                                    سکونت</label>-->
                                                 <div class="grid sm:grid-cols-3 gap-5"
                                                      x-data="{range: function(start, end) { return Array(end - start + 1).fill().map((_, idx) => start + idx) } }">
 
@@ -1947,6 +2126,29 @@
                                                            name="notinsuranceCount"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
+
+                                                <div class="space-y-1">
+                                                    <label class="font-medium text-xs text-muted">گواهی سابقه
+                                                        بیمه</label>
+
+                                                    <div class="relative">
+                                                        <!-- input واقعی (پنهان) -->
+                                                        <input type="file" id="insuranceHistoryFile"
+                                                               name="insuranceHistoryFile"
+                                                               class="hidden" onchange="updateFileName(this)"
+                                                               accept=".pdf,.jpg,.jpeg,.png"/>
+
+                                                        <!-- label به‌جای دکمه choose file -->
+                                                        <label for="insuranceHistoryFile"
+                                                               class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                            📎 انتخاب فایل
+                                                        </label>
+
+                                                        <!-- محل نمایش نام فایل انتخاب‌شده -->
+                                                        <span id="insuranceHistoryFileName"
+                                                              class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                    </div>
+                                                </div>
                                             </div>
 
 
@@ -1966,26 +2168,30 @@
                                                     <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeEducation(this)"
-                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                         <!-- نام مقطع تحصیلی -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">مقطع تحصیلی</label>
+                                                            <label class="font-medium text-xs text-muted">مقطع
+                                                                تحصیلی</label>
                                                             <select dir="rtl"
                                                                     th:field="*{educations[__${iterStat.index}__].degree}"
                                                                     class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
                                                                 <option value="" disabled selected>انتخاب کنید</option>
-                                                                <option value="دیپلم">دیپلم</option>
                                                                 <option value="لیسانس">لیسانس</option>
                                                                 <option value="فوق لیسانس">فوق لیسانس</option>
                                                                 <option value="دکترا">دکترا</option>
+                                                                <option value="فوق دکترا">فوق دکترا</option>
                                                             </select>
                                                         </div>
 
                                                         <!-- رشته تحصیلی -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">رشته تحصیلی</label>
+                                                            <label class="font-medium text-xs text-muted">رشته
+                                                                تحصیلی</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{educations[__${iterStat.index}__].field}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2001,7 +2207,8 @@
 
                                                         <!-- تاریخ شروع -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">تاریخ شروع</label>
+                                                            <label class="font-medium text-xs text-muted">تاریخ
+                                                                شروع</label>
                                                             <input type="date" dir="rtl"
                                                                    th:field="*{educations[__${iterStat.index}__].startDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2009,9 +2216,18 @@
 
                                                         <!-- تاریخ پایان -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">تاریخ پایان</label>
+                                                            <label class="font-medium text-xs text-muted">تاریخ
+                                                                پایان</label>
                                                             <input type="date" dir="rtl"
                                                                    th:field="*{educations[__${iterStat.index}__].endDate}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
+
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">عکس
+                                                                دانشنامه</label>
+                                                            <input type="file" dir="rtl"
+                                                                   th:field="*{educations[__${iterStat.index}__].file}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
                                                     </div>
@@ -2020,11 +2236,12 @@
 
                                             <!-- دکمه افزودن مقطع تحصیلی جدید -->
                                             <button type="button" onclick="addEducation()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن مقطع تحصیلی</button>
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن مقطع تحصیلی
+                                            </button>
 
-<!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
-<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
-
+                                            <!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
+                                            <!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
 
 
                                             <div class="flex items-center gap-3">
@@ -2044,12 +2261,15 @@
                                                     <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeExperience(this)"
-                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                         <!-- نام شرکت -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">نام شرکت یا سازمان</label>
+                                                            <label class="font-medium text-xs text-muted">نام شرکت یا
+                                                                سازمان</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].company}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2057,7 +2277,8 @@
 
                                                         <!-- شهر محل شرکت -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">شهر محل شرکت</label>
+                                                            <label class="font-medium text-xs text-muted">شهر محل
+                                                                شرکت</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].city}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2065,7 +2286,8 @@
 
                                                         <!-- تاریخ شروع همکاری -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">تاریخ شروع همکاری</label>
+                                                            <label class="font-medium text-xs text-muted">تاریخ شروع
+                                                                همکاری</label>
                                                             <input type="date" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].startDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2073,7 +2295,8 @@
 
                                                         <!-- تاریخ پایان همکاری -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">تاریخ پایان همکاری</label>
+                                                            <label class="font-medium text-xs text-muted">تاریخ پایان
+                                                                همکاری</label>
                                                             <input type="date" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].endDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2081,7 +2304,8 @@
 
                                                         <!-- مدت زمان همکاری -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">مدت زمان همکاری</label>
+                                                            <label class="font-medium text-xs text-muted">مدت زمان
+                                                                همکاری</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].duration}"
                                                                    placeholder="مثلاً ۲ سال و ۳ ماه"
@@ -2090,7 +2314,8 @@
 
                                                         <!-- سمت شغلی -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">سمت شغلی</label>
+                                                            <label class="font-medium text-xs text-muted">سمت
+                                                                شغلی</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{experiences[__${iterStat.index}__].position}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2101,9 +2326,11 @@
 
                                             <!-- دکمه افزودن سابقه شغلی جدید -->
                                             <button type="button" onclick="addExperience()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن سابقه شغلی</button>
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن سابقه شغلی
+                                            </button>
                                             <!-- دکمه ثبت فرم -->
-<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
+                                            <!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
 
 
                                             <div class="flex items-center gap-3">
@@ -2123,12 +2350,15 @@
                                                     <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeCourse(this)"
-                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                         <!-- عنوان دوره -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">عنوان دوره</label>
+                                                            <label class="font-medium text-xs text-muted">عنوان
+                                                                دوره</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{courses[__${iterStat.index}__].title}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2144,7 +2374,8 @@
 
                                                         <!-- تاریخ دریافت -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">تاریخ دریافت</label>
+                                                            <label class="font-medium text-xs text-muted">تاریخ
+                                                                دریافت</label>
                                                             <input type="date" dir="rtl"
                                                                    th:field="*{courses[__${iterStat.index}__].receivedDate}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2152,22 +2383,50 @@
 
                                                         <!-- مدت دوره -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">مدت دوره</label>
+                                                            <label class="font-medium text-xs text-muted">مدت
+                                                                دوره</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{courses[__${iterStat.index}__].duration}"
                                                                    placeholder="مثلاً ۲ هفته یا ۳ ماه"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
+
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">گواهینامه</label>
+
+                                                            <div class="relative">
+                                                                <!-- input واقعی (پنهان) -->
+                                                                <input type="file" id="courseFile${index}"
+                                                                       name="courses[${index}].file"
+                                                                       class="hidden"
+                                                                       onchange="updateCourseFileName(${index}, this)"
+                                                                       accept=".pdf,.jpg,.jpeg,.png"/>
+                                                                <!-- بدون required، اختیاری است -->
+
+                                                                <!-- دکمه انتخاب فایل -->
+                                                                <label for="courseFile${index}"
+                                                                       class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+                                                                    📎 انتخاب فایل
+                                                                </label>
+
+                                                                <!-- نمایش نام فایل انتخاب‌شده -->
+                                                                <span id="courseFileName${index}"
+                                                                      class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- دکمه افزودن دوره جدید -->
                                             <button type="button" onclick="addCourse()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن دوره یا گواهی‌نامه</button>
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن دوره یا گواهی‌نامه
+                                            </button>
 
-<!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
-<!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
+                                            <!--                                            &lt;!&ndash; دکمه ثبت فرم &ndash;&gt;-->
+                                            <!--                                            <button type="submit" class="w-full h-11 bg-green-600 text-white rounded-xl text-sm font-medium mt-2">ثبت</button>-->
 
 
                                             <div class="flex items-center gap-3">
@@ -2187,12 +2446,15 @@
                                                     <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeSkill(this)"
-                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                         <!-- مهارت تخصصی -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">مهارت تخصصی</label>
+                                                            <label class="font-medium text-xs text-muted">مهارت
+                                                                تخصصی</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{skills[__${iterStat.index}__].technical}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2200,7 +2462,8 @@
 
                                                         <!-- مهارت نرم -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">مهارت نرم</label>
+                                                            <label class="font-medium text-xs text-muted">مهارت
+                                                                نرم</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{skills[__${iterStat.index}__].soft}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2211,7 +2474,9 @@
 
                                             <!-- دکمه افزودن مهارت جدید -->
                                             <button type="button" onclick="addSkill()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن مهارت</button>
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن مهارت
+                                            </button>
 
 
                                             <div class="flex items-center gap-3">
@@ -2231,12 +2496,15 @@
                                                     <!-- دکمه حذف -->
                                                     <button type="button"
                                                             onclick="removeResearch(this)"
-                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
                                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                         <!-- عنوان پژوهش/مقاله -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">عنوان پژوهش/مقاله</label>
+                                                            <label class="font-medium text-xs text-muted">عنوان
+                                                                پژوهش/مقاله</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{researches[__${iterStat.index}__].title}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2244,7 +2512,8 @@
 
                                                         <!-- هدف از پژوهش -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">هدف از پژوهش</label>
+                                                            <label class="font-medium text-xs text-muted">هدف از
+                                                                پژوهش</label>
                                                             <input type="text" dir="rtl"
                                                                    th:field="*{researches[__${iterStat.index}__].objective}"
                                                                    class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
@@ -2252,7 +2521,8 @@
 
                                                         <!-- لینک پژوهش (اختیاری) -->
                                                         <div class="space-y-1">
-                                                            <label class="font-medium text-xs text-muted">لینک پژوهش (اختیاری)</label>
+                                                            <label class="font-medium text-xs text-muted">لینک پژوهش
+                                                                (اختیاری)</label>
                                                             <input type="url" dir="rtl"
                                                                    th:field="*{researches[__${iterStat.index}__].link}"
                                                                    placeholder="https://example.com"
@@ -2264,8 +2534,9 @@
 
                                             <!-- دکمه افزودن پژوهش جدید -->
                                             <button type="button" onclick="addResearch()"
-                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن پژوهش/مقاله</button>
-
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن پژوهش/مقاله
+                                            </button>
 
 
                                             <div class="flex items-center gap-3">
@@ -2273,52 +2544,126 @@
                                                     <div class="w-1 h-1 bg-foreground rounded-full"></div>
                                                     <div class="w-2 h-2 bg-foreground rounded-full"></div>
                                                 </div>
-                                                <div class="font-black text-foreground">حوزه فعالیت تخصصی (خوداظهاری)</div>
+                                                <div class="font-black text-foreground">حوزه فعالیت تخصصی (خوداظهاری)
+                                                </div>
                                             </div>
 
-                                                <!-- لیست حوزه‌های فعالیت تخصصی -->
-                                                <div id="expertise-list" class="flex flex-col gap-6">
-                                                    <div th:each="exp, iterStat : *{expertises}"
-                                                         class="expertise-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+                                            <!-- لیست حوزه‌های فعالیت تخصصی -->
+                                            <div id="expertise-list" class="flex flex-col gap-6">
+                                                <div th:each="exp, iterStat : *{expertises}"
+                                                     class="expertise-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
 
-                                                        <!-- دکمه حذف -->
-                                                        <button type="button"
-                                                                onclick="removeExpertise(this)"
-                                                                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button"
+                                                            onclick="removeExpertise(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
 
-                                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                            <!-- حوزه فعالیت -->
-                                                            <div class="space-y-1">
-                                                                <label class="font-medium text-xs text-muted">حوزه فعالیت</label>
-                                                                <input type="text" dir="rtl"
-                                                                       th:field="*{expertises[__${iterStat.index}__].field}"
-                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-                                                            </div>
+                                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                        <!-- حوزه فعالیت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">حوزه
+                                                                فعالیت</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{expertises[__${iterStat.index}__].field}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
 
-                                                            <!-- حوزه صنعت -->
-                                                            <div class="space-y-1">
-                                                                <label class="font-medium text-xs text-muted">حوزه صنعت</label>
-                                                                <input type="text" dir="rtl"
-                                                                       th:field="*{expertises[__${iterStat.index}__].industry}"
-                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-                                                            </div>
+                                                        <!-- حوزه صنعت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">حوزه
+                                                                صنعت</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{expertises[__${iterStat.index}__].industry}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
+                                                        </div>
 
-                                                            <!-- گرایش فعالیت -->
-                                                            <div class="space-y-1">
-                                                                <label class="font-medium text-xs text-muted">مدت زمان فعالیت (ماه)</label>
-                                                                <input type="number" dir="rtl"
-                                                                       th:field="*{expertises[__${iterStat.index}__].orientation}"
-                                                                       class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-                                                            </div>
+                                                        <!-- گرایش فعالیت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">مدت زمان
+                                                                فعالیت (ماه)</label>
+                                                            <input type="number" dir="rtl"
+                                                                   th:field="*{expertises[__${iterStat.index}__].orientation}"
+                                                                   class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <!-- دکمه افزودن حوزه جدید -->
-                                                <button type="button" onclick="addExpertise()"
-                                                        class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">➕ افزودن حوزه فعالیت</button>
+                                            <!-- دکمه افزودن حوزه جدید -->
+                                            <button type="button" onclick="addExpertise()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن حوزه فعالیت
+                                            </button>
 
 
+                                            <div class="flex items-center gap-3">
+                                                <div class="flex items-center gap-1">
+                                                    <div class="w-1 h-1 bg-foreground rounded-full"></div>
+                                                    <div class="w-2 h-2 bg-foreground rounded-full"></div>
+                                                </div>
+                                                <div class="font-black text-foreground">ُسوابق تجربی</div>
+                                            </div>
+
+
+                                            <div id="personalExperience-list" class="flex flex-col gap-6">
+                                                <div th:each="exp, iterStat : *{personalExperiences}"
+                                                     class="personalExperience-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+
+                                                    <!-- دکمه حذف -->
+                                                    <button type="button" onclick="removePersonalExperience(this)"
+                                                            class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">
+                                                        ❌
+                                                    </button>
+
+                                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                                        <!-- نام شرکت -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">نام
+                                                                شرکت</label>
+                                                            <input type="text" dir="rtl"
+                                                                   th:field="*{personalExperiences[__${iterStat.index}__].companyName}"
+                                                                   class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+                                                        </div>
+
+                                                        <!-- تاریخ شروع تصدی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">تاریخ شروع
+                                                                تصدی</label>
+                                                            <input type="date"
+                                                                   th:field="*{personalExperiences[__${iterStat.index}__].startDate}"
+                                                                   class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+                                                        </div>
+
+                                                        <!-- تاریخ اتمام -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">تاریخ
+                                                                اتمام</label>
+                                                            <input type="date"
+                                                                   th:field="*{personalExperiences[__${iterStat.index}__].endDate}"
+                                                                   class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+                                                        </div>
+
+                                                        <!-- روزنامه رسمی -->
+                                                        <div class="space-y-1">
+                                                            <label class="font-medium text-xs text-muted">روزنامه
+                                                                رسمی</label>
+                                                            <input type="file" dir="rtl"
+                                                                   th:field="*{personalExperiences[__${iterStat.index}__].officialGazette}"
+                                                                   class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- دکمه افزودن سابقه تجربی -->
+                                            <button type="button" onclick="addPersonalExperience()"
+                                                    class="w-full h-11 bg-primary text-white rounded-xl text-sm font-medium mt-2">
+                                                ➕ افزودن سابقه تجربی
+                                            </button>
+
+                                            <!-- لیست حوزه‌های فعالیت تخصصی -->
 
 
                                             <div class="flex justify-end gap-5">
@@ -2945,7 +3290,7 @@
         const container = document.getElementById('education-list');
         const maxSections = 8;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا ۴ مقطع تحصیلی اضافه کنید!");
             return;
         }
@@ -2987,6 +3332,28 @@
                 <input type="date" name="educations[${index}].endDate"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
+
+            <div class="space-y-1">
+  <label class="font-medium text-xs text-muted">عکس دانشنامه</label>
+
+  <div class="relative">
+    <!-- input واقعی (پنهان) -->
+    <input type="file" id="educationFile${index}" name="educations[${index}].file"
+           class="hidden" onchange="updateEducationFileName(${index}, this)"
+           accept=".pdf,.jpg,.jpeg,.png"/>
+           <!-- توجه: هیچ required ای ندارد -->
+
+    <!-- دکمه انتخاب فایل -->
+    <label for="educationFile${index}"
+           class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+      📎 انتخاب فایل
+    </label>
+
+    <!-- نمایش نام فایل انتخاب‌شده -->
+    <span id="educationFileName${index}" class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+  </div>
+</div>
+
         </div>
     </div><br>`;
         container.insertAdjacentHTML('beforeend', template);
@@ -3003,7 +3370,7 @@
         const container = document.getElementById('experience-list');
         const maxSections = 12;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا ۵ سابقه شغلی اضافه کنید!");
             return;
         }
@@ -3060,7 +3427,7 @@
         const container = document.getElementById('courses-list');
         const maxSections = 10;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا 5 دوره اضافه کنید!");
             return;
         }
@@ -3092,6 +3459,27 @@
                        placeholder="مثلاً ۲ هفته یا ۳ ماه"
                        class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
             </div>
+           <div class="space-y-1">
+  <label class="font-medium text-xs text-muted">گواهینامه</label>
+
+  <div class="relative">
+    <!-- input واقعی (پنهان) -->
+    <input type="file" id="courseFile${index}" name="courses[${index}].file"
+           class="hidden" onchange="updateCourseFileName(${index}, this)"
+           accept=".pdf,.jpg,.jpeg,.png"/>
+           <!-- بدون required، اختیاری است -->
+
+    <!-- دکمه انتخاب فایل -->
+    <label for="courseFile${index}"
+           class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+      📎 انتخاب فایل
+    </label>
+
+    <!-- نمایش نام فایل انتخاب‌شده -->
+    <span id="courseFileName${index}" class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+  </div>
+</div>
+
         </div>
     </div><br>`;
         container.insertAdjacentHTML('beforeend', template);
@@ -3107,7 +3495,7 @@
         const container = document.getElementById('skills-list');
         const maxSections = 10;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا 5 مهارت اضافه کنید!");
             return;
         }
@@ -3143,7 +3531,7 @@
         const container = document.getElementById('research-list');
         const maxSections = 10;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا 5 پژوهش اضافه کنید!");
             return;
         }
@@ -3186,7 +3574,7 @@
         const container = document.getElementById('expertise-list');
         const maxSections = 10;
 
-        if(container.children.length >= maxSections) {
+        if (container.children.length >= maxSections) {
             alert("شما فقط می‌توانید تا 5 حوزه فعالیت اضافه کنید!");
             return;
         }
@@ -3223,11 +3611,158 @@
 
     }
 
+    function addPersonalExperience() {
+        const container = document.getElementById('personalExperience-list');
+        const maxSections = 10;
+
+        if (container.children.length >= maxSections) {
+            alert("شما فقط می‌توانید تا 5 سابقه تجربی اضافه کنید!");
+            return;
+        }
+
+        const index = container.children.length;
+        const template = `
+    <div class="personalExperience-item relative p-5 rounded-xl border border-border bg-secondary space-y-4 shadow-sm">
+        <button type="button" onclick="removePersonalExperience(this)"
+                class="absolute top-2 right-2 z-20 text-red-500 font-bold text-sm">❌</button>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">نام شرکت</label>
+                <input type="text" name="personalExperiences[${index}].companyName"
+                       class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ شروع تصدی</label>
+                <input type="date" name="personalExperiences[${index}].startDate"
+                       class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+            </div>
+            <div class="space-y-1">
+                <label class="font-medium text-xs text-muted">تاریخ اتمام</label>
+                <input type="date" name="personalExperiences[${index}].endDate"
+                       class="form-input w-full h-11 bg-secondary border-border rounded-xl text-sm px-5"/>
+            </div>
+            <div class="space-y-1">
+  <label class="font-medium text-xs text-muted">روزنامه رسمی</label>
+
+  <div class="relative">
+    <!-- input واقعی (پنهان) -->
+    <input type="file" id="officialGazetteFile${index}"
+           name="personalExperiences[${index}].officialGazette"
+           class="hidden" onchange="updateOfficialGazetteFileName(${index}, this)"
+           accept=".pdf,.jpg,.jpeg,.png"/>
+           <!-- بدون required، اختیاری است -->
+
+    <!-- دکمه انتخاب فایل -->
+    <label for="officialGazetteFile${index}"
+           class="cursor-pointer inline-block bg-primary text-white text-sm font-medium rounded-xl px-4 py-2">
+      📎 انتخاب فایل
+    </label>
+
+    <!-- نمایش نام فایل انتخاب‌شده -->
+    <span id="officialGazetteFileName${index}" class="ml-3 text-sm text-muted">فایلی انتخاب نشده است</span>
+  </div>
+</div>
+
+        </div>
+    </div><br>`;
+        container.insertAdjacentHTML('beforeend', template);
+    }
+
+    function removePersonalExperience(button) {
+        const expDiv = button.closest('.personalExperience-item');
+        if (expDiv) expDiv.remove();
+    }
+
+
+    function updateFileName(input) {
+        const fileNameSpan = document.getElementById('insuranceHistoryFileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateBirthCertificateFileName(input) {
+        const fileNameSpan = document.getElementById('birthCertificateFileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateBirthCertificatePage2FileName(input) {
+        const fileNameSpan = document.getElementById('birthCertificatePage2FileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateBirthCertificatePage3FileName(input) {
+        const fileNameSpan = document.getElementById('birthCertificatePage3FileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateNationalCardFrontFileName(input) {
+        const fileNameSpan = document.getElementById('nationalCardFrontFileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateMilitaryCardFileName(input) {
+        const fileNameSpan = document.getElementById('militaryCardFileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateEducationFileName(index, input) {
+        const fileNameSpan = document.getElementById('educationFileName' + index);
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateCourseFileName(index, input) {
+        const fileNameSpan = document.getElementById('courseFileName' + index);
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+    function updateOfficialGazetteFileName(index, input) {
+        const fileNameSpan = document.getElementById('officialGazetteFileName' + index);
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+
+
+
+
     const sexSelect = document.getElementById('sex');
     const maleDiv = document.getElementById('militarySection');
 
-    sexSelect.addEventListener('change', function() {
-        if(this.value === 'مرد') {
+    sexSelect.addEventListener('change', function () {
+        if (this.value === 'مرد') {
             maleDiv.style.display = 'block';
         } else {
             maleDiv.style.display = 'none';
