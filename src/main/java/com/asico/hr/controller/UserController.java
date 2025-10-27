@@ -129,13 +129,13 @@ public class UserController {
 
     @PostMapping(value = "/position")
     public ModelAndView time(@RequestParam("position") String position, @RequestParam("companyName") String company,
-                             @RequestParam("userAccept") String userAccept, HttpServletRequest request, HttpSession httpSession) {
+                             @RequestParam("userAccept") String userAccept, @RequestParam("industry") String industry, HttpServletRequest request, HttpSession httpSession) {
 
         System.out.println(position);
         System.out.println(company);
         System.out.println(userAccept);
 
-        int refcode= UniqueRandomGenerator.generateUnique8Digit();
+        int refcode = UniqueRandomGenerator.generateUnique8Digit();
 
         try {
 
@@ -155,6 +155,7 @@ public class UserController {
                 positionRequest.setDate(new Date());
                 positionRequest.setIsUserAccept(userAccept);
                 positionRequest.setRefcode(refcode);
+                positionRequest.setIndustry(industry);
                 positionService.save(positionRequest);
                 smsService.sendWelcomeCourseSmsAsync(phoneNumber, userModel.getName(), String.valueOf(refcode));
                 ModelAndView view = new ModelAndView("redirect:/profile");

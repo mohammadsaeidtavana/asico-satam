@@ -47,6 +47,10 @@ public class positionRequest extends BaseEntity<Long> {
     @Column(name = "refrence_code")
     private int refcode;
 
+    @Column(name = "industry")
+    private String industry;
+
+
 
 
 
