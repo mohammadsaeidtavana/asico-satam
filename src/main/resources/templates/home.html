@@ -16,7 +16,22 @@
 
     <style>
 
-        .shadow {
+        .modal-dialog {
+            position: fixed;
+            top: 5px !important; /* حدود ۵ سانت از بالا */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .modal-content {
+            background-color: #87CEEB !important; /* آبی آسمانی */
+            color: #fff; /* رنگ متن سفید برای کنتراست بهتر */
+            border-radius: 15px !important; /* گردی گوشه‌ها */
+        }
+
+
+
+          .shadow {
             filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.5)); /* Adjust shadow parameters as needed */
         }
 
@@ -2417,6 +2432,35 @@
     <!-- end footer -->
 </div>
 
+<!--<div id="welcomeModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-start justify-center hidden">-->
+<!--    <div class="bg-white p-6 rounded-2xl shadow-lg w-96 text-center mt-10">-->
+<!--        <h2 class="text-lg font-semibold mb-3">خوش آمدید!</h2>-->
+<!--        <p class="text-sm text-gray-600 mb-4">-->
+<!--            به وب‌سایت ما خوش آمدید. لطفاً قبل از شروع، اطلاعات خود را بررسی کنید.-->
+<!--        </p>-->
+<!--        <button onclick="closeModal()" class="btn btn-primary">-->
+<!--            متوجه شدم-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="welcomeModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="margin-top: 80px;"> <!-- حدود ۵ سانتی‌متر پایین‌تر -->
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title">سامانه توسعه و انتصاب مدیریت (ستام)</h5>
+            </div>
+            <div class="modal-body">
+                <p>این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.</p>
+            </div>
+            <br>
+            <center><a class="modal-title" target="_blank" href="https://asico-upload-storage.darkube.app/asico/files/Manual.pdf">مشاهده ی مصوبه</a></center>
+
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="closeModal()">متوجه شدم</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     function news() {
         var emailInput = document.getElementById("email");
@@ -2429,7 +2473,19 @@
         }
     }
 
-    alert("این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.\n ")
+
+    window.addEventListener("load", function() {
+        // بررسی اینکه قبلاً مودال نمایش داده نشده
+        if (!localStorage.getItem("welcomeShown")) {
+            document.getElementById("welcomeModal").classList.remove("hidden");
+            localStorage.setItem("welcomeShown", "true"); // فقط یک‌بار نمایش
+        }
+    });
+
+    function closeModal() {
+
+        document.getElementById("welcomeModal").classList.add("hidden");
+    }
 
 
 </script>
