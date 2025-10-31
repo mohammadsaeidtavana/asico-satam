@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.hozeh.lms</groupId>
 	<artifactId>hozeh-website</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>asico-hr-website</name>
 	<description>website for asicon hr   </description>
 	<properties>
@@ -87,7 +87,23 @@
 			<scope>runtime</scope>
 			<version>3.2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>io.minio</groupId>
+			<artifactId>minio</artifactId>
+			<version>8.5.8</version>
+		</dependency>
 
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okio</groupId>
+			<artifactId>okio</artifactId>
+			<version>3.6.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>

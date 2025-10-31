@@ -1,14 +1,17 @@
 package com.asico.hr;
 
+import com.asico.hr.miniIo.MiniIoService;
 import com.asico.hr.payment.service.OrderService;
 import com.asico.hr.payment.service.PaymentService;
 import com.asico.hr.service.CartService;
 import com.asico.hr.service.CourseService;
+import com.asico.hr.service.FileUploadService;
 import com.asico.hr.service.UserService;
 import com.asico.hr.sms.service.SmsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 
 @SpringBootTest
 class HozehWebsiteApplicationTests {
@@ -32,9 +35,27 @@ class HozehWebsiteApplicationTests {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MiniIoService fileUploadService;
+
+    @Autowired
+    FileUploadService fileUploadService2;
 
     @Test
     void testsms(){
+
+//        MockMultipartFile file = new MockMultipartFile(
+//                "file", "test.txt", "text/plain", "Hello Minio".getBytes()
+//        );
+//
+//        String nationalId = "1234567890";
+//        String fileName = "test";
+//
+//        String result = fileUploadService2.upload(file, nationalId, fileName, "testdir");
+//        System.out.println(result);
+
+
+
 //
 //        UserModel userModel=userService.search("09034856387");
 //        System.out.println(userModel.getName());

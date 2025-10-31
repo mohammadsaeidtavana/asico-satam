@@ -385,7 +385,7 @@
                                     </svg>
                                 </span>
                                 <span class="xs:flex flex-col items-start hidden text-xs space-y-1">
-                                    <span class="font-semibold text-foreground" th:text="${session.userinfo.name}">جلال بهرامی راد</span>
+                                    <span class="font-semibold text-foreground"  th:text="${session.UserProfile.fullname}">جلال بهرامی راد</span>
                                     <span class="font-semibold text-muted">خوش آمـــدید</span>
                                 </span>
                                 <span class="text-foreground transition-transform"
@@ -1155,11 +1155,11 @@
                                             <div class="flex items-center gap-1">
                                                 <div
                                                     class="flex-shrink-0 w-8 h-8 border border-white rounded-full overflow-hidden">
-                                                    <img src="./assets/images/avatars/01.jpeg"
+                                                    <img th:src="${session.ProfilePicture}"
                                                         class="w-full h-full object-cover" alt="...">
                                                 </div>
                                                 <a href="./lecturer.html"
-                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary" th:text="${session.userinfo.name}">جلال
+                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary"  th:text="${session.UserProfile.fullname}">جلال
                                                     بهرامی راد</a>
                                             </div>
                                             <a href="./article-category.html"
@@ -1209,11 +1209,11 @@
                                             <div class="flex items-center gap-1">
                                                 <div
                                                     class="flex-shrink-0 w-8 h-8 border border-white rounded-full overflow-hidden">
-                                                    <img src="./assets/images/avatars/01.jpeg"
+                                                    <img th:src="${session.ProfilePicture}"
                                                         class="w-full h-full object-cover" alt="...">
                                                 </div>
                                                 <a href="./lecturer.html"
-                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary" th:text="${session.userinfo.name}">جلال
+                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary"  th:text="${session.UserProfile.fullname}">جلال
                                                     بهرامی راد</a>
                                             </div>
                                             <a href="./article-category.html"
@@ -1263,11 +1263,11 @@
                                             <div class="flex items-center gap-1">
                                                 <div
                                                     class="flex-shrink-0 w-8 h-8 border border-white rounded-full overflow-hidden">
-                                                    <img src="./assets/images/avatars/01.jpeg"
+                                                    <img th:src="${session.ProfilePicture}"
                                                         class="w-full h-full object-cover" alt="...">
                                                 </div>
                                                 <a href="./lecturer.html"
-                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary" th:text="${session.userinfo.name}">جلال
+                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary"  th:text="${session.UserProfile.fullname}">جلال
                                                     بهرامی راد</a>
                                             </div>
                                             <a href="./article-category.html"
@@ -1317,11 +1317,11 @@
                                             <div class="flex items-center gap-1">
                                                 <div
                                                     class="flex-shrink-0 w-8 h-8 border border-white rounded-full overflow-hidden">
-                                                    <img src="./assets/images/avatars/01.jpeg"
+                                                    <img th:src="${session.ProfilePicture}"
                                                         class="w-full h-full object-cover" alt="...">
                                                 </div>
                                                 <a href="./lecturer.html"
-                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary" th:text="${session.userinfo.name}">جلال
+                                                    class="line-clamp-1 font-bold text-xs text-foreground transition-colors hover:text-primary"  th:text="${session.UserProfile.fullname}">جلال
                                                     بهرامی راد</a>
                                             </div>
                                             <a href="./article-category.html"

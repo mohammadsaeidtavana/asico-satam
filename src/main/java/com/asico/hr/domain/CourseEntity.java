@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "COURSE")
+@Table(name = "LMS_COURSE")
 public class CourseEntity extends BaseEntity<Long> {
 
     @Column(name = "COURSE_NAME")

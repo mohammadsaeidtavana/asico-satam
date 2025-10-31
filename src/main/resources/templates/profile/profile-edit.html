@@ -410,7 +410,7 @@
                                     </svg>
                                 </span>
                             <span class="xs:flex flex-col items-start hidden text-xs space-y-1">
-                                    <span class="font-semibold text-foreground" th:text="${session.userinfo.name}">جلال بهرامی راد</span>
+                                    <span class="font-semibold text-foreground" th:text="${session.UserProfile.fullname}">جلال بهرامی راد</span>
                                     <span class="font-semibold text-muted">خوش آمـــدید</span>
                                 </span>
                             <span class="text-foreground transition-transform"
@@ -725,8 +725,8 @@
                                                         </a>
                                                     </li>
                                                 </ul>
-                                            </div><!-- end offcanvas:content -->
-                </div><!-- end offcanvas:box -->
+                                            </div> end offcanvas:content -->
+<!--                </div>&lt;!&ndash; end offcanvas:box &ndash;&gt;-->
 
                 <!-- offcanvas:overlay -->
                 <div class="fixed inset-0 h-screen bg-secondary/80 cursor-pointer transition-all duration-1000 z-40"
@@ -745,13 +745,13 @@
                     <div class="flex items-center gap-5 mb-5">
                         <div class="flex items-center gap-3">
                             <div class="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden">
-                                <img src="./assets/images/avatars/01.jpeg" class="w-full h-full object-cover"
+                                <img th:src="${session.ProfilePicture}" class="w-full h-full object-cover"
                                      alt="..."/>
                             </div>
                             <div class="flex flex-col items-start space-y-1">
                                 <span class="font-black text-xl ml-2 text-muted">سلام</span>
                                 <span class="line-clamp-1 font-semibold text-sm text-foreground cursor-default"
-                                      th:text="${session.userinfo.name}">جلال
+                                      th:text="${session.UserProfile.fullname}">جلال
                                         بهرامی راد</span>
                             </div>
                         </div>
@@ -1027,7 +1027,7 @@
                                             <div class="font-black text-foreground">اطلاعات شناسنامه</div>
                                         </div>
 
-                                        <form th:action="@{/v1/user/edit}" method="post" onsubmit="edit()"
+                                        <form th:action="@{/v1/user/edit}"  id="userProfileForm" th:object="${UserProfile}" method="post" enctype="multipart/form-data" onsubmit="edit()"
                                               class="space-y-5">
 
 <!--                                            <div class="grid sm:grid-cols-2 gap-5">-->
@@ -1055,13 +1055,16 @@
                                                 <div class="space-y-1">
 <!--                                                    <label class="font-medium text-xs text-muted block">عکس پرسنلی</label>-->
                                                     <img id="profilePreview"
-                                                         th:src="${user != null} ? @{/uploads/${user.photo}} : @{/images/default-avatar.png}"
+                                                         th:src="${session.ProfilePicture}"
                                                          alt="عکس پرسنلی"
-                                                         class="w-32 h-32 object-cover rounded-full border border-border cursor-pointer hover:opacity-80 transition"
+                                                         th:field="*{picture}"
+                                                         width="150" height="150"
+                                                         class=" object-cover rounded-full border border-border cursor-pointer hover:opacity-80 transition"
                                                          onclick="document.getElementById('profileFile').click()"/>
-                                                    <input type="file" id="profileFile" name="profilePhoto"
+                                                    <input type="file" id="profileFile" name="picture"
                                                            class="hidden"
                                                            accept="image/*"
+                                                           th:field="*{picture}"
                                                            onchange="previewProfileImage(event)">
                                                       </div>
 
@@ -1077,13 +1080,13 @@
                                                     <label for="fullname" class="font-medium text-xs text-muted">نام
                                                         و
                                                         نام خانوادگی (فارسی)</label>
-                                                    <input type="text" id="fullname" name="fullname"
+                                                    <input type="text" id="fullname" name="fullname" th:field="*{fullname}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5" required/>
                                                 </div>
                                                 <div class="space-y-1">
                                                     <label for="email"
                                                            class="font-medium text-xs text-muted">ایمیل</label>
-                                                    <input type="text" id="email2" dir="ltr" name="email2"
+                                                    <input type="text" id="email2" dir="ltr" name="email2" th:field="*{email2}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                     <div class="font-medium text-xs text-muted">
 
@@ -1095,14 +1098,14 @@
                                                 <div class="space-y-1">
                                                     <label for="fullname" class="font-medium text-xs text-muted">کد
                                                         ملی </label>
-                                                    <input type="number" id="codemeli" name="codemeli"
+                                                    <input type="text" id="codemeli" name="codemeli" th:field="*{codemeli}"  readonly
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
                                                 <div class="space-y-1">
                                                     <label for="email"
                                                            class="font-medium text-xs text-muted">شماره
                                                         شناسنامه </label>
-                                                    <input type="number" id="codeshenasname" dir="ltr"
+                                                    <input type="number" id="codeshenasname" dir="ltr" th:field="*{codeshenasname}"
                                                            name="codeshenasname"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                     <div class="font-medium text-xs text-muted">
@@ -1112,7 +1115,7 @@
                                                 <div class="space-y-1">
                                                     <label for="email"
                                                            class="font-medium text-xs text-muted">نام پدر </label>
-                                                    <input type="text" id="fathername" dir="ltr" name="fathername"
+                                                    <input type="text" id="fathername" dir="ltr" name="fathername" th:field="*{fathername}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                     <div class="font-medium text-xs text-muted">
 
@@ -1121,7 +1124,7 @@
                                                 <div class="space-y-1">
                                                     <label for="email"
                                                            class="font-medium text-xs text-muted"> محل تولد </label>
-                                                    <input type="text" id="BDplace" dir="ltr" name="BDplace"
+                                                    <input type="text" id="BDplace" dir="ltr" name="BDplace" th:field="*{BDplace}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                     <div class="font-medium text-xs text-muted">
 
@@ -1142,6 +1145,7 @@
                                                                 <input type="file" id="birthCertificateFile"
                                                                        name="birthCertificateFile"
                                                                        class="hidden"
+                                                                       th:field="*{birthCertificateFile}"
                                                                        onchange="updateBirthCertificateFileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png" required/>
 
@@ -1168,6 +1172,7 @@
                                                                 <input type="file" id="birthCertificatePage2File"
                                                                        name="birthCertificatePage2File"
                                                                        class="hidden"
+                                                                       th:field="*{birthCertificatePage2File}"
                                                                        onchange="updateBirthCertificatePage2FileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png" required/>
 
@@ -1193,6 +1198,7 @@
                                                                 <input type="file" id="birthCertificatePage3File"
                                                                        name="birthCertificatePage3File"
                                                                        class="hidden"
+                                                                       th:field="*{birthCertificatePage3File}"
                                                                        onchange="updateBirthCertificatePage3FileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png"/>
 
@@ -1221,6 +1227,7 @@
                                                                 <input type="file" id="nationalCardFrontFile"
                                                                        name="nationalCardFrontFile"
                                                                        class="hidden"
+                                                                       th:field="*{nationalCardFrontFile}"
                                                                        onchange="updateNationalCardFrontFileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png" required/>
 
@@ -1247,6 +1254,7 @@
                                                                 <input type="file" id="nationalCardBackFile"
                                                                        name="nationalCardBackFile"
                                                                        class="hidden"
+                                                                       th:field="*{nationalCardBackFile}"
                                                                        onchange="updateNationalCardBackFileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png" required/>
 
@@ -1273,6 +1281,7 @@
                                                                 <input type="file" id="militaryCardFile"
                                                                        name="militaryCardFile"
                                                                        class="hidden"
+                                                                       th:field="*{militaryCardFile}"
                                                                        onchange="updateMilitaryCardFileName(this)"
                                                                        accept=".pdf,.jpg,.jpeg,.png"/>
 
@@ -1322,7 +1331,8 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب سال', selectedValue: '' }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="bdyear" id="bdyear"
+                                                            <input type="hidden" name="BDyear" id="BDyear"
+                                                                   th:field="*{BDyear}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1368,7 +1378,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب ماه', selectedValue: '', options: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="bdmonth" id="bdmonth"
+                                                            <input type="hidden" name="BDmonth" id="BDmonth" th:field="*{BDmonth}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1414,7 +1424,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب روز', selectedValue: '' }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="bdday" id=" bdday"
+                                                            <input type="hidden" name="BDday" id=" BDday" th:field="*{BDday}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1468,7 +1478,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب سال', selectedValue: '' }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="issuyear" id="issuyear"
+                                                            <input type="hidden" name="BDissuyear" id="BDissuyear" th:field="*{BDissuyear}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1514,7 +1524,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب ماه', selectedValue: '', options: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="issumonth" id="issumonth"
+                                                            <input type="hidden" name="BDissumonth" id="BDissumonth" th:field="*{BDissumonth}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1560,7 +1570,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'انتخاب روز', selectedValue: '' }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="issuday" id="issuday"
+                                                            <input type="hidden" name="BDissuday" id="BDissuday" th:field="*{BDissuday}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1613,7 +1623,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'جنسیت', selectedValue: '', options: [  'زن ', 'مرد'] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="sex" id="sex"
+                                                            <input type="hidden" name="sex" id="sex" th:field="*{sex}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1671,7 +1681,7 @@
                                                         <div class="w-full relative"
                                                              x-data="{ open: false, selectedOption: 'وضعیت نظام وظیفه', selectedValue: '', options: [ 'مشمول', 'غیبت', 'معافیت پزشکی', 'معافیت کفالت ', 'معافیت تحصیلی', 'اتمام خدمت ', 'معافیت دائم'] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="military" id="military"
+                                                            <input type="hidden" name="military" id="military" th:field="*{military}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1733,7 +1743,7 @@
         'بیرجند', 'ایلام', 'بندر ماهشهر', 'کاشان', 'دزفول', 'اندیمشک', 'بجنورد', 'سمنان', 'قائم‌شهر', 'گرمسار'
     ] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="ostan" id="ostan"
+                                                            <input type="hidden" name="city" id="city" th:field="*{city}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1795,7 +1805,7 @@
         'بیرجند', 'ایلام', 'بندر ماهشهر', 'کاشان', 'دزفول', 'اندیمشک', 'بجنورد', 'سمنان', 'قائم‌شهر', 'گرمسار'
     ] }">
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="city" id="city"
+                                                            <input type="hidden" name="province" id="province" th:field="*{province}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1840,10 +1850,10 @@
                                                     <div class="flex flex-col space-y-2">
                                                         <!-- form:select -->
                                                         <div class="w-full relative"
-                                                             x-data="{ open: false, selectedOption: 'وضعیت تاهل ', selectedValue: '', options: [   'متاهل', 'مجرد', 'مطلقه', ] }">
+                                                             x-data="{ open: false, selectedOption: 'وضعیت تاهل ', selectedValue: '', options: [   'متاهل', 'مجرد' ] }">
 
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="mariage" id="mariage"
+                                                            <input type="hidden" name="mariage" id="mariage" th:field="*{mariage}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1890,7 +1900,7 @@
                                                              x-data="{ open: false, selectedOption: 'ملیت ', selectedValue: '', options: [   'ایرانی ', 'غیر ایرانی ', ] }">
 
                                                             <!-- The selected value is stored in this input. -->
-                                                            <input type="hidden" name="nationalityM" id="nationalityM"
+                                                            <input type="hidden" name="nationalityM" id="nationalityM" th:field="*{nationalityM}"
                                                                    x-model="selectedValue"/>
 
                                                             <!-- form:select:button -->
@@ -1938,9 +1948,9 @@
                                             <div class="space-y-1">
                                                 <label for="bio" class="font-medium text-xs text-muted">آدرس محل
                                                     سکونت </label>
-                                                <textarea rows="5" id="Address"
+                                                <textarea rows="5" id="address" th:field="*{address}"
                                                           class="form-textarea w-full !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"
-                                                          name="Address"></textarea>
+                                                          name="address"></textarea>
                                             </div>
 
 
@@ -1962,21 +1972,21 @@
                                                 <div class="space-y-1">
                                                     <label for="website"
                                                            class="font-medium text-xs text-muted">کد پستی</label>
-                                                    <input type="number" dir="ltr" id="post" name="post"
+                                                    <input type="number" dir="ltr" id="post" name="post" th:field="*{post}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
                                                 <div class="space-y-1">
                                                     <label for="github"
                                                            class="font-medium text-xs text-muted">تابعیت</label>
-                                                    <input type="text" dir="ltr" id="nationality" name="nationality"
+                                                    <input type="text" dir="ltr" id="nationality" name="nationality" th:field="*{nationality}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
                                                 <div class="space-y-1">
                                                     <label for="linkedin"
                                                            class="font-medium text-xs text-muted">دین  </label>
-                                                    <input type="text" dir="ltr" id="religion" name="religion"
+                                                    <input type="text" dir="ltr" id="religion" name="religion" th:field="*{religion}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
-                                                </div>ب
+                                                </div>
 
                                             </div>
 
@@ -1996,7 +2006,7 @@
                                                          x-data="{ open: false, selectedOption: 'کارمند دولت هستم  ', selectedValue: '', options: [   'کارمند دولت نیستم ', 'کارمند دولت هستم ', ] }">
 
                                                         <!-- The selected value is stored in this input. -->
-                                                        <input type="hidden" name="isgoverment" id="isgoverment"
+                                                        <input type="hidden" name="isgoverment" id="isgoverment" th:field="*{isgoverment}"
                                                                x-model="selectedValue"/>
 
                                                         <!-- form:select:button -->
@@ -2043,7 +2053,7 @@
                                                          x-data="{ open: false, selectedOption: 'ّبازنشسته نیستم   ', selectedValue: '', options: [   'بازنسشته هستم یا کمتر از 2 سال مانده به بازنشستگی  ', 'بازنشسته نیستم ', ] }">
 
                                                         <!-- The selected value is stored in this input. -->
-                                                        <input type="hidden" name="isretire" id="isretire"
+                                                        <input type="hidden" name="isretire" id="isretired" th:field="*{isretired}"
                                                                x-model="selectedValue"/>
 
                                                         <!-- form:select:button -->
@@ -2091,7 +2101,7 @@
                                                          x-data="{ open: false, selectedOption: ' سابقه فعالیت در شرکت های تابعه صندوق بازنشستگی دارم ', selectedValue: '', options: [   'سابقه فعالیت در شرکت های تابعه صندوق بازنشستگی دارم  ', 'سابقه فعالیت در شرکت های تابعه صندوق بازنشستگی ندارم  ', ] }">
 
                                                         <!-- The selected value is stored in this input. -->
-                                                        <input type="hidden" name="isasico" id="isasico"
+                                                        <input type="hidden" name="isasico" id="isasico" th:field="*{isasico}"
                                                                x-model="selectedValue"/>
 
                                                         <!-- form:select:button -->
@@ -2135,7 +2145,7 @@
                                                 <div class="space-y-1">
 
                                                     <input type="text" dir="rtl" id="sandoghCompanyName"
-                                                           name="asicoCompanyName" placeholder="نام شرکت در صندوق"
+                                                           name="sandoghCompanyName" placeholder="نام شرکت در صندوق" th:field="*{sandoghCompanyName}"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
 
@@ -2143,8 +2153,8 @@
                                                     <label for="telegram"
                                                            class="font-medium text-xs text-muted">مدت سابقه کار بیمه ای
                                                         (ماه)</label>
-                                                    <input type="number" dir="rtl" id="insuranceCount"
-                                                           name="insuranceCount"
+                                                    <input type="number" dir="rtl" id="insuranceHistoryCount" th:field="*{insuranceHistoryCount}"
+                                                           name="insuranceHistoryCount"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
 
@@ -2152,7 +2162,7 @@
                                                     <label for="telegram"
                                                            class="font-medium text-xs text-muted">مدت سابقه کار غیر بیمه
                                                         ای (ماه)</label>
-                                                    <input type="number" dir="rtl" id="notinsuranceCount"
+                                                    <input type="number" dir="rtl" id="notinsuranceCount" th:field="*{notinsuranceCount}"
                                                            name="notinsuranceCount"
                                                            class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5"/>
                                                 </div>
@@ -2165,6 +2175,7 @@
                                                         <!-- input واقعی (پنهان) -->
                                                         <input type="file" id="insuranceHistoryFile"
                                                                name="insuranceHistoryFile"
+                                                               th:field="*{insuranceHistoryFile}"
                                                                class="hidden" onchange="updateFileName(this)"
                                                                accept=".pdf,.jpg,.jpeg,.png"/>
 
@@ -2706,8 +2717,9 @@
                                                 <div class="relative">
                                                     <!-- input واقعی (پنهان) -->
                                                     <input type="file" id="resumeFile"
-                                                           name="resume"
+                                                           name="resumeFile"
                                                            class="hidden"
+                                                           th:field="*{resumeFile}"
                                                            onchange="previewResumeFile(this)"
                                                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"/>
                                                     <!-- بدون multiple، فقط یک فایل قابل انتخاب است -->
@@ -3334,12 +3346,50 @@
 
         }
     }
-
-    function edit() {
-
-        alert("  حساب کاربری با موفقیت ویرایش شد !");
+    function  edit(){
+        alert("ثبت نام شما با موفقیت انجام شد")
     }
 
+    function edit2() {
+// لیست تمام فیلدها (id ها) شامل متنی و فایل‌ها
+        const allFields = [
+            "picture", "fullname", "email2", "codemeli", "codeshenasname",
+            "fathername", "BDplace", "birthCertificateFile", "birthCertificatePage2File",
+            "birthCertificatePage3File", "nationalCardFrontFile", "nationalCardBackFile",
+            "militaryCardFile", "BDyear", "BDmonth", "BDday",
+            "BDissuyear", "BDissumonth", "BDissuday", "sex", "military", "city",
+            "province", "mariage", "nationalityM", "address", "post",
+            "nationality", "religion", "isgoverment", "isretired", "isasico",
+            "sandoghCompanyName", "insuranceHistoryCount", "notinsuranceCount",
+            "insuranceHistoryFile", "resumeFile"
+        ];
+
+        for (let i = 0; i < allFields.length; i++) {
+            const field = document.getElementById(allFields[i]);
+            if (!field) continue; // اگر فیلد پیدا نشد نادیده بگیر
+
+            if (field.type === "file") {
+                if (field.files.length === 0) {
+                    alert(`لطفاً فیلد "${allFields[i]}" را پر کنید!`);
+                    field.focus();
+                    return false;
+                }
+            } else {
+                if (!field.value || field.value.trim() === "") {
+                    alert(`لطفاً فیلد "${allFields[i]}" را پر کنید!`);
+                    field.focus();
+                    return false;
+                }
+            }
+        }
+
+        return true; // همه فیلدها پر هستند
+    }
+    document.getElementById("userProfileForm").addEventListener("submit", function(e) {
+        if (!validateUserProfileForm()) {
+            e.preventDefault(); // جلوگیری از ارسال فرم در صورت خالی بودن فیلدها
+        }
+    });
     function editphone() {
 
         alert("  شماره موبایل   با موفقیت ویرایش شد ، لطفا مجدد وارد پنل خود شوید !");

@@ -397,7 +397,7 @@
                                     </svg>
                                 </span>
                             <span class="xs:flex flex-col items-start hidden text-xs space-y-1">
-                                    <span class="font-semibold text-foreground" th:text="${session.userinfo.name}">جلال بهرامی راد</span>
+                                    <span class="font-semibold text-foreground"  th:text="${session.UserProfile.fullname}">جلال بهرامی راد</span>
                                     <span class="font-semibold text-muted">خوش آمـــدید</span>
                                 </span>
                             <span class="text-foreground transition-transform"
@@ -732,13 +732,13 @@
                     <div class="flex items-center gap-5 mb-5">
                         <div class="flex items-center gap-3">
                             <div class="flex-shrink-0 w-10 h-10 rounded-full overflow-hidden">
-                                <img src="./assets/images/avatars/01.jpeg" class="w-full h-full object-cover"
+                                <img th:src="${session.ProfilePicture}" class="w-full h-full object-cover"
                                      alt="..."/>
                             </div>
                             <div class="flex flex-col items-start space-y-1">
                                 <span class="font-black text-xl ml-2 text-muted">سلام</span>
                                 <span class="line-clamp-1 font-semibold text-sm text-foreground cursor-default"
-                                      th:text="${session.userinfo.name}">جلال
+                                       th:text="${session.UserProfile.fullname}">جلال
                                         بهرامی راد</span>
                             </div>
                         </div>
