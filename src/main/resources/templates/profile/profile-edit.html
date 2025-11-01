@@ -2222,10 +2222,9 @@
                                                                     th:field="*{educations[__${iterStat.index}__].degree}"
                                                                     class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
                                                                 <option value="" disabled selected>انتخاب کنید</option>
-                                                                <option value="لیسانس">لیسانس</option>
-                                                                <option value="فوق لیسانس">فوق لیسانس</option>
-                                                                <option value="دکترا">دکترا</option>
-                                                                <option value="فوق دکترا">فوق دکترا</option>
+                                                                <option value="کارشناسی"> کارشناسی</option>
+                                                                <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+                                                                <option value=" فوق دکترا و بالاتر">  دکترا و بالاتر</option>
                                                             </select>
                                                         </div>
 
@@ -3415,10 +3414,10 @@
                 <select dir="rtl" name="educations[${index}].degree"
                         class="form-input w-full h-11 !ring-0 !ring-offset-0 bg-secondary border-border focus:border-border rounded-xl text-sm text-foreground px-5">
                     <option value="" disabled selected>انتخاب کنید</option>
-                    <option value="دیپلم">دیپلم</option>
-                    <option value="لیسانس">لیسانس</option>
-                    <option value="فوق لیسانس">فوق لیسانس</option>
-                    <option value="دکترا">دکترا</option>
+
+                    <option value="کارشناسی"> کارشناسی</option>
+                    <option value="کارشناسی ارشد">کارشناسی ارشد</option>
+                     <option value=" فوق دکترا و بالاتر">  دکترا و بالاتر</option>
                 </select>
             </div>
             <div class="space-y-1">
@@ -3821,6 +3820,15 @@
 
     function updateNationalCardFrontFileName(input) {
         const fileNameSpan = document.getElementById('nationalCardFrontFileName');
+        if (input.files && input.files.length > 0) {
+            fileNameSpan.textContent = input.files[0].name;
+        } else {
+            fileNameSpan.textContent = "فایلی انتخاب نشده است";
+        }
+    }
+    function updateNationalCardBackFileName(input){
+
+        const fileNameSpan = document.getElementById('nationalCardBackFile');
         if (input.files && input.files.length > 0) {
             fileNameSpan.textContent = input.files[0].name;
         } else {
