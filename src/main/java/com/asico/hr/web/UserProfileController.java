@@ -74,7 +74,7 @@ public class UserProfileController {
     private final String baseDirectory = "profile/";
 
     @RequestMapping(value = "/userpanle")
-    public ModelAndView panel(Model model ,HttpSession httpSession) {
+    public ModelAndView panel(Model model, HttpSession httpSession) {
 
         String codeMeli = (String) httpSession.getAttribute("codeMeli");
         UserProfileEntity userProfileEntity = userProfileService.searchByNationalCode(codeMeli);
@@ -317,13 +317,17 @@ public class UserProfileController {
         System.out.println("/////profile-edit");
 
         String codeMeli = (String) httpSession.getAttribute("codeMeli");
+        System.out.println("==== code meli" + codeMeli);
         ModelAndView modelAndView = new ModelAndView(baseDirectory + "profile-edit");
         // اضافه کردن شیء UserProfile به مدل
 
         UserProfileEntity userProfileEntity = userProfileService.searchByNationalCode(codeMeli);
         UserProfile profile = new UserProfile();
+
+        System.out.println("===user profile entity" + userProfileEntity);
         if (userProfileEntity == null) {
 
+            System.out.println("===== null section =======");
             profile.setCodemeli(codeMeli);
             profile.setFullname("کاربر سامانه");
             httpSession.setAttribute("ProfilePicture", imageUrl);
@@ -331,6 +335,8 @@ public class UserProfileController {
             modelAndView.addObject("UserProfile", profile);
 
         } else {
+
+            System.out.println("===== not null section ======");
             UserProfile userProfile = userProfileMapper.entityToDto(userProfileEntity);
             if (userProfileEntity.getPicture() == null) {
                 userProfileEntity.setPicture(imageUrl);
@@ -403,18 +409,18 @@ public class UserProfileController {
         }
 
         System.out.println(type);
-        if (type.equals("register")){
-            String headerMessage="ثبت درخواست تصدی سمت ";
-            String message="درخواست تصدی سمت شما با موفقیت ثبت شد.کد یکتای سامانه به شماره موبای شما ارسال گردید. ";
+        if (type.equals("register")) {
+            String headerMessage = "ثبت درخواست تصدی سمت ";
+            String message = "درخواست تصدی سمت شما با موفقیت ثبت شد.کد یکتای سامانه به شماره موبای شما ارسال گردید. ";
             model.addAttribute("message", message);
             model.addAttribute("headerMessage", headerMessage);
-        }else if (type.equals("profileEdit")){
+        } else if (type.equals("profileEdit")) {
 
             String headerMessage = "ثبت ویرایش حساب کاربری";
             String message = "ویرایش پروفایل با موفقیت انجام شد . جهت ادامه فرایند  وارد بخش تصدی سمت شوید. ";
             model.addAttribute("message", message);
             model.addAttribute("headerMessage", headerMessage);
-        }else {
+        } else {
             String headerMessage = "";
             String message = " ";
             model.addAttribute("message", message);

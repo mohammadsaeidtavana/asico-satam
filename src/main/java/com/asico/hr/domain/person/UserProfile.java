@@ -97,11 +97,11 @@ public class UserProfile {
     private String religion;      // دین
 
     @JsonProperty("isgoverment")
-    private Boolean isgoverment; // آیا کارمند دولت است یا خیر
+    private String isgoverment; // آیا کارمند دولت است یا خیر
     @JsonProperty("isretired")
-    private Boolean isretired; // آیا بازنشسته است یا خیر
+    private String isretired; // آیا بازنشسته است یا خیر
     @JsonProperty("isasico")
-    private Boolean isasico; // آیا تحت پوشش بیمه تامین اجتماعی است یا خیر
+    private String isasico; // آیا تحت پوشش بیمه تامین اجتماعی است یا خیر
     @JsonProperty("sandoghCompanyName")
     private String sandoghCompanyName; // نام شرکت در صندوق
     @JsonProperty("insuranceHistoryCount")

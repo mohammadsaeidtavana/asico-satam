@@ -31,7 +31,7 @@ import java.util.List;
  * @since 2024
  */
 @Controller
-@SessionAttributes("UserProfile")
+//@SessionAttributes("UserProfile")
 @RequestMapping("/v1/user")
 public class UserController {
 
@@ -80,10 +80,10 @@ public class UserController {
         this.userProfileService = userProfileService;
     }
 
-    @ModelAttribute("UserProfile")
-    public UserProfile userProfile() {
-        return new UserProfile();
-    }
+//    @ModelAttribute("UserProfile")
+//    public UserProfile userProfile() {
+//        return new UserProfile();
+//    }
 
     // دریافت فرم و ذخیره تغییرات
     @PostMapping("/edit")
@@ -95,7 +95,10 @@ public class UserController {
     ) {
 
         if (bindingResult.hasErrors()) {
-            // خطاهای validation: فرم را دوباره render کن
+            System.out.println("====== binding error");
+            bindingResult.getAllErrors().forEach(error -> {
+                System.out.println(error.getObjectName() + " : " + error.getDefaultMessage());
+            });
             ModelAndView view = new ModelAndView("redirect:/profile-edit");
             return view;
         }

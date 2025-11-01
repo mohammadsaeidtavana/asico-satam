@@ -104,11 +104,11 @@ public class UserProfileEntity extends BaseEntity<Long> {
     private String religion;      // دین
 
     @Column(name = "is_government")
-    private Boolean isgoverment; // آیا کارمند دولت است یا خیر
+    private String isgoverment; // آیا کارمند دولت است یا خیر
     @Column(name = "is_retired")
-    private Boolean isretired; // آیا بازنشسته است یا خیر
+    private String isretired; // آیا بازنشسته است یا خیر
     @Column(name = "is_asico")
-    private Boolean isasico; // آیا تحت پوشش بیمه تامین اجتماعی است یا خیر
+    private String isasico; // آیا تحت پوشش بیمه تامین اجتماعی است یا خیر
     @Column(name = "sandogh_company_name", length = 200)
     private String sandoghCompanyName; // نام شرکت در صندوق
     @Column(name = "insurance_history_count")
