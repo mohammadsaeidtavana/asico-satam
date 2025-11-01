@@ -20,7 +20,7 @@ public class Course extends BaseEntity<Long> {
     @Column(name = "organizer", length = 200)
     private String organizer;
     @Column(name = "received_date")
-    private LocalDate receivedDate;
+    private String receivedDate;
     @Column(name = "duration", length = 100)
     private String duration;
     @Column(name = "file", length = 500)

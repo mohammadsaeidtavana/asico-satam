@@ -12,9 +12,9 @@ public class PersonalExperience {
     @JsonProperty("companyName")
     private String companyName;          // نام شرکت
     @JsonProperty("startDate")
-    private LocalDate startDate;         // تاریخ شروع تصدی
+    private String startDate;         // تاریخ شروع تصدی
     @JsonProperty("endDate")
-    private LocalDate endDate;           //
+    private String endDate;           //
     @JsonProperty("officialGazette")// تاریخ اتمام
     private MultipartFile officialGazette; // فایل روزنامه رسمی
 }

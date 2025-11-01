@@ -15,9 +15,9 @@ public class Education {
     @JsonProperty("university")
     private String university;
     @JsonProperty("startDate")
-    private LocalDate startDate;
+    private String startDate;
     @JsonProperty("endDate")
-    private LocalDate endDate;
+    private String endDate;
     @JsonProperty("file")
     private MultipartFile file; // برای فایل دانشنامه
 

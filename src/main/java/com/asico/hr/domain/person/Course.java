@@ -14,7 +14,7 @@ public class Course {
     @JsonProperty("organizer")
     private String organizer;
     @JsonProperty("receivedDate")
-    private LocalDate receivedDate;
+    private String receivedDate;
     @JsonProperty("duration")
     private String duration;
     @JsonProperty("file")

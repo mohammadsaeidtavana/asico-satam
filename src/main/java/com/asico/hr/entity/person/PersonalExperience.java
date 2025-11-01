@@ -18,9 +18,9 @@ public class PersonalExperience  extends BaseEntity<Long> {
     @Column(name = "company_name", length = 200)
     private String companyName;          // نام شرکت
     @Column(name = "start_date")
-    private LocalDate startDate;         // تاریخ شروع تصدی
+    private String startDate;         // تاریخ شروع تصدی
     @Column(name = "end_date")
-    private LocalDate endDate;           //
+    private String endDate;           //
     @Column(name = "official_gazette_link", length = 500)
     private String officialGazetteLink; // فایل روزنامه رسمی
 

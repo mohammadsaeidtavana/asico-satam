@@ -12,9 +12,9 @@ public class Experience {
     @JsonProperty("city")
     private String city;
     @JsonProperty("startDate")
-    private LocalDate startDate;
+    private String startDate;
     @JsonProperty("endDate")
-    private LocalDate endDate;
+    private String endDate;
     @JsonProperty("duration")
     private String duration;
     @JsonProperty("position")

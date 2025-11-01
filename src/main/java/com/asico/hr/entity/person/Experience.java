@@ -19,9 +19,9 @@ public class Experience extends BaseEntity<Long> {
     @Column(name = "city", length = 150)
     private String city;
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private String startDate;
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private String endDate;
     @Column(name = "duration", length = 100)
     private String duration;
     @Column(name = "position", length = 150)

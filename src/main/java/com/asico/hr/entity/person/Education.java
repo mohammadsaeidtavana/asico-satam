@@ -21,9 +21,9 @@ public class Education  extends BaseEntity<Long> {
     @Column(name = "university", length = 200)
     private String university;
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private String startDate;
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private String endDate;
     @Column(name = "file", length = 500)
     private String file; // برای فایل دانشنامه
 
