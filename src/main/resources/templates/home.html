@@ -15,14 +15,45 @@
 
 
     <style>
+        /*.btn-close-custom {*/
+        /*    position: absolute;       !* حتما این باشد *!*/
+        /*    top: 10px;                !* فاصله از بالا *!*/
+        /*    right: 10px;              !* فاصله از راست *!*/
+        /*    background: none;*/
+        /*    border: none;*/
+        /*    color: red;*/
+        /*    font-size: 1.5rem;*/
+        /*    cursor: pointer;*/
+        /*}*/
 
+        .btn-close-custom {
+            position: relative;
+            float: right;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: red;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1050; /* بالاتر از محتوا */
+        }
         .modal-dialog {
             position: fixed;
             top: 5px !important; /* حدود ۵ سانت از بالا */
-            left: 50%;
+            left: 80%;
             transform: translateX(-50%);
         }
 
+        .pdf-link {
+            color: #0044cc; /* آبی پررنگ */
+            font-weight: bold; /* اختیاری برای ضخیم‌تر شدن متن */
+            text-decoration: none; /* اختیاری، حذف خط زیرین */
+        }
+
+        .pdf-link:hover {
+            text-decoration: underline; /* هنگام هاور خط زیرین اضافه شود */
+        }
         .modal-content {
             background-color: #87CEEB !important; /* آبی آسمانی */
             color: #fff; /* رنگ متن سفید برای کنتراست بهتر */
@@ -2443,21 +2474,65 @@
 <!--        </button>-->
 <!--    </div>-->
 <!--</div>-->
-<div id="welcomeModal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog" style="margin-top: 80px;"> <!-- حدود ۵ سانتی‌متر پایین‌تر -->
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <h5 class="modal-title">سامانه توسعه و انتصاب مدیریت (ستام)</h5>
-            </div>
-            <div class="modal-body">
-                <p>این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.</p>
-            </div>
-            <br>
-            <center><a class="modal-title" target="_blank" href="https://asico-upload-storage.darkube.app/asico/files/Manual.pdf">مشاهده ی مصوبه</a></center>
+<!--<div id="welcomeModal" class="modal fade" tabindex="-1">-->
+<!--    <div class="modal-dialog" style="margin-top: 80px;"> &lt;!&ndash; حدود ۵ سانتی‌متر پایین‌تر &ndash;&gt;-->
+<!--        <div class="modal-content text-center">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">سامانه توسعه و انتصاب مدیریت (ستام)</h5>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <p>این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.</p>-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            <center><a class="modal-title" target="_blank" href="https://asico-upload-storage.darkube.app/asico/files/Manual.pdf">مشاهده ی مصوبه</a></center>-->
 
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="closeModal()">متوجه شدم</button>
+<!--            <div class="modal-footer justify-content-center">-->
+<!--                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="closeModal()">متوجه شدم</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div id="welcomeModal" class="modal fade" tabindex="-1">-->
+<!--    <div class="modal-dialog" style="margin-top: 80px;">-->
+<!--        <div class="modal-content text-center position-relative">-->
+
+<!--            &lt;!&ndash; دکمه بستن قرمز در بالا سمت راست &ndash;&gt;-->
+<!--            <button type="button" class="position-absolute top-2 end-2 btn-close-custom" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">-->
+<!--                ❌-->
+<!--            </button>-->
+
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">سامانه توسعه و انتصاب مدیریت (ستام)</h5>-->
+<!--            </div>-->
+
+<!--            <div class="modal-body">-->
+<!--                <p>این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.</p>-->
+<!--                <center><a class="modal-title" target="_blank" href="https://asico-upload-storage.darkube.app/asico/files/Manual.pdf">مشاهده ی مصوبه</a></center>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="welcomeModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="margin-top: 80px;">
+        <div class="modal-content position-relative text-center p-4">
+
+            <!-- دکمه ❌ گوشه بالا سمت راست -->
+            <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                ❌
+            </button>
+
+
+            <div class="modal-body">
+                <p class="modal-title">سامانه توسعه و انتصاب مدیریت (ستام)</p>
+                <p>این سامانه بر اساس مصوبه هیئت وزیران به شماره 111175 مورخ 1404/07/13 طراحی و پیاده‌سازی شده است. استفاده از این سامانه تابع قوانین و مقررات کشور جمهوری اسلامی ایران می‌باشد و کاربران موظف به رعایت تمامی ضوابط مربوطه هستند.</p>
+                <center>
+                    <a target="_blank" href="https://asico-upload-storage.darkube.app/asico/files/Manual.pdf" class="pdf-link">
+                        مشاهده ی مصوبه
+                    </a>                </center>
             </div>
+
         </div>
     </div>
 </div>
