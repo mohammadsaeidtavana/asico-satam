@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemoryUtil {
 
-    private static Long expiryTime = 240000L;
+    private static Long expiryTime = 120000L;
 
 
     public static TimedHashMap<String, String> smsOtp = new TimedHashMap<>(expiryTime);

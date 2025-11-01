@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "Experience")
+@ToString(exclude = "userProfile")
 public class Experience extends BaseEntity<Long> {
     @Column(name = "company", length = 200)
     private String company;
@@ -28,6 +30,7 @@ public class Experience extends BaseEntity<Long> {
     private String position;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_profile_id", nullable = false)
+//    @JoinColumn(name = "user_profile_id", nullable = false)
+    @JoinColumn(name = "user_profile_id", foreignKey = @ForeignKey(name = "fk_experience_user_profile"))
     private UserProfileEntity userProfile;
 }

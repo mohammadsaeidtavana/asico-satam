@@ -68,6 +68,7 @@ public class MiniIoService {
             return baseUrl + "/" + bucketName + "/" + fileName;
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("خطا در آپلود فایل به MinIO", e);
         }
     }

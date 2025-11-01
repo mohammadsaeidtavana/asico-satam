@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_profiles")
+@ToString(exclude = {"educations", "experiences", "courses", "skills", "researches", "expertises", "personalExperiences"})
 public class UserProfileEntity extends BaseEntity<Long> {
 
     @Column(name = "picture", length = 500)

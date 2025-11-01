@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author mohammad saeid tavana
@@ -93,25 +94,33 @@ public class UserController {
             Model model,
             HttpSession httpSession
     ) {
+        try {
 
-        if (bindingResult.hasErrors()) {
-            System.out.println("====== binding error");
-            bindingResult.getAllErrors().forEach(error -> {
-                System.out.println(error.getObjectName() + " : " + error.getDefaultMessage());
-            });
-            ModelAndView view = new ModelAndView("redirect:/profile-edit");
-            return view;
-        }
-        System.out.println("////////edit form controller");
 
-        System.out.println(userProfile.toString());
+            if (bindingResult.hasErrors()) {
+                System.out.println("====== binding error");
+                bindingResult.getAllErrors().forEach(error -> {
+                    System.out.println(error.getObjectName() + " : " + error.getDefaultMessage());
+                });
+                ModelAndView view = new ModelAndView("redirect:/profile-edit");
+                return view;
+            }
+            System.out.println("////////edit form controller");
 
-        UserProfileEntity profile = userProfileService.searchByNationalCode(userProfile.getCodemeli());
-        if (profile == null) {
-            userProfileService.save(userProfile);
-        }else {
-            userProfileService.delete(userProfile);
-            userProfileService.save(userProfile);
+            System.out.println(userProfile.toString());
+
+            UserProfileEntity profile = userProfileService.searchByNationalCode(userProfile.getCodemeli());
+            if (profile == null) {
+              //  userProfileService.saveAsync(userProfile);
+               userProfileService.save(userProfile);
+            } else {
+                userProfileService.delete(userProfile);
+                userProfileService.save(userProfile);
+//                CompletableFuture.runAsync(() -> userProfileService.delete(userProfile))
+//                        .thenRunAsync(() -> userProfileService.saveAsync(userProfile));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         // موفقیت: redirect به فرم یا صفحه موفقیت
         httpSession.setAttribute("UserProfile", userProfile);

@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Research")
+@ToString(exclude = "userProfile")
 public class Research extends BaseEntity<Long> {
 
     @Column(name = "title", length = 200)
@@ -21,6 +23,7 @@ public class Research extends BaseEntity<Long> {
     private String link;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_profile_id", nullable = false)
+    //@JoinColumn(name = "user_profile_id", nullable = false)
+    @JoinColumn(name = "user_profile_id", foreignKey = @ForeignKey(name = "fk_research_user_profile"))
     private UserProfileEntity userProfile;
 }
