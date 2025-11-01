@@ -3995,14 +3995,47 @@
 
 
 
-    const sexSelect = document.getElementById('sex');
-    const maleDiv = document.getElementById('militarySection');
+    document.addEventListener("DOMContentLoaded", function () {
+        const sexOptions = document.querySelectorAll('[name="sex"] ~ div ul li');
+        const militarySection = document.getElementById("militarySection");
 
-    sexSelect.addEventListener('change', function () {
-        if (this.value === 'مرد') {
-            maleDiv.style.display = 'block';
-        } else {
-            maleDiv.style.display = 'none';
+        // به صورت پیش‌فرض بخش نظام وظیفه مخفی باشد
+        militarySection.style.display = "none";
+
+        sexOptions.forEach((option, index) => {
+            option.addEventListener("click", function () {
+                // اگر گزینه "مرد" انتخاب شود (index === 1 چون دومین گزینه است)
+                if (index === 1) {
+                    militarySection.style.display = "block";
+                } else {
+                    militarySection.style.display = "none";
+                }
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const retireInput = document.getElementById("isretired");
+
+        if (!retireInput) return;
+
+        // هر بار که مقدار x-model در Alpine تغییر کند، input هم به‌روزرسانی می‌شود
+        const observer = new MutationObserver(() => {
+            checkRetirement();
+        });
+
+        // وقتی مقدار تغییر کند، واکنش بده
+        observer.observe(retireInput, { attributes: true, attributeFilter: ['value'] });
+
+        function checkRetirement() {
+            // مقدار عددی انتخاب‌شده (index + 1)
+            const value = retireInput.value;
+
+            // گزینه اول = بازنشسته هستم
+            if (value === '1') {
+                alert("بازنشستگان محترم امکان درخواست بررسی صلاحیت را ندارند.");
+                window.location.href = "https://setam.asico.ir"; // ← آدرس دلخواهت اینجا
+            }
         }
     });
 
